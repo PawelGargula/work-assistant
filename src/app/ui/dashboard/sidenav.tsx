@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import NavLinks from '@/app/ui/dashboard/nav-links';
+import NavLinks from '@/src/app/ui/dashboard/nav-links';
 import { PowerIcon } from '@heroicons/react/24/outline';
-import { signOut } from 'next-auth/react';
-import WorkAssistantLogo from '@/app/ui/work-assistant-logo';
+import { signOut } from '@/auth';
+import WorkAssistantLogo from '@/src/app/ui/work-assistant-logo';
 
 export default function SideNav() {
   return (

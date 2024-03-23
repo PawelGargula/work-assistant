@@ -14,6 +14,6 @@ Increase efficiency and pleasure of your work.
   - Most time-consuming tasks
   - Average daily time spent on tasks
 - Export work status/reports
-- Pomodoro timer working on background, tells you when you shout make a break, change position and so on
+- Pomodoro timer working on background, tells you when you should make a break, change position and so on
   - Configure interval
   - Configure break messages

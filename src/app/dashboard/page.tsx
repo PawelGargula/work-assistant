@@ -1,3 +1,10 @@
-export default function Page() {
-    return <p>Dashboard Page</p>;
+import { auth, signOut } from '@/auth';
+ 
+export default async function Page() {
+  const session = await auth();
+  return (
+    <>
+      <p>Welcome {session?.user?.email}!</p>
+    </>
+  );
 }

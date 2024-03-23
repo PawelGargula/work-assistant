@@ -7,7 +7,9 @@ const prisma = new PrismaClient()
 
 export const {
     handlers: { GET, POST },
-    auth
+    auth,
+    signIn,
+    signOut
 } = NextAuth({
     adapter: PrismaAdapter(prisma),
     providers: [
