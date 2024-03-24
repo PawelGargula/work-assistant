@@ -1,7 +1,13 @@
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation'
 import SignInForm from "@/src/app/ui/sign-in/sign-in-form";
 import WorkAssistantLogo from "./ui/work-assistant-logo";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  const isLoggedIn = !!session?.user;
+  isLoggedIn && redirect("/dashboard");
+  
   return (
     <div className="space-y-2">
       <WorkAssistantLogo />
