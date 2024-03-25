@@ -8,7 +8,7 @@ export default async function Page() {
   
   return (
     <>
-      <p>Welcome {session?.user?.email}!</p>
+      <h1 className='text-lg'>Dashboard</h1>
     </>
   );
 }

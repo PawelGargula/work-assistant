@@ -9,7 +9,7 @@ export default async function Home() {
   isLoggedIn && redirect("/dashboard");
   
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 p-3">
       <WorkAssistantLogo />
       <p className="bg-slate-50 p-2 rounded-md text-sm">Increase efficiency and pleasure of your work</p>
       <SignInForm />

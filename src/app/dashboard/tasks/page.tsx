@@ -6,5 +6,5 @@ export default async function Page() {
     const isLoggedIn = !!session?.user;
     !isLoggedIn && redirect("/");
 
-    return <p>Tasks</p>;
+    return <h1 className='text-lg'>Tasks</h1>;
 }
