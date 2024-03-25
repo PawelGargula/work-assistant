@@ -2,6 +2,8 @@
 
 Increase efficiency and pleasure of your work.
 
+## [Demo](https://work-assistant-puce.vercel.app/)
+
 ## How it works
 
 - Sign in by email (authentication link)
