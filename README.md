@@ -1,4 +1,4 @@
-# Work assistant
+# Work assistant (in progress)
 
 Increase efficiency and pleasure of your work.
 
@@ -6,7 +6,7 @@ Increase efficiency and pleasure of your work.
 
 ## How it works
 
-- Sign in by email (authentication link)
+- Sign in by email (authentication link) :heavy_check_mark:
 - Add hierarchical tasks with time estimation
 - Start/stop tracking time of current task
 - Close task
