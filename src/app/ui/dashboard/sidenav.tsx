@@ -7,14 +7,11 @@ import WorkAssistantLogo from '@/src/app/ui/work-assistant-logo';
 export default function SideNav() {
   return (
     <div className="flex h-full flex-col md:px-2">
-      <Link
-        className="bg-violet-500 mb-2 rounded-md"
-        href="/dashboard"
+      <div
+        className="bg-violet-500 mb-2 rounded-md text-white"
       >
-        <div className=" text-white">
-          <WorkAssistantLogo />
-        </div>
-      </Link>
+        <WorkAssistantLogo />
+      </div>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
@@ -24,7 +21,7 @@ export default function SideNav() {
             await signOut();
           }}
         >
-          <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-violet-100 hover:text-violet-700 md:flex-none md:justify-start md:p-2 md:px-3">
+          <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium focus-visible:outline-violet-500 hover:text-violet-600 md:flex-none md:justify-start md:p-2 md:px-3">
             <PowerIcon className="w-6" />
             <div className="hidden md:block">Sign Out</div>
           </button>

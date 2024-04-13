@@ -43,6 +43,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    tasks         Task[]
 }
 
 model VerificationToken {
@@ -51,4 +52,33 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Task {
+    id                    String      @id @default(cuid())
+    title                 String
+    description           String
+    status                TaskStatus  @default(NOTTRACKING)
+    User                  User        @relation(fields: [userId], references: [id])
+    userId                String
+    createdAt             DateTime    @default(now())
+    plannedCompletionTime Int // In minutes
+    parent                Task?       @relation("ParentTask", fields: [parentId], references: [id])
+    parentId              String?
+    children              Task[]      @relation("ParentTask")
+    timeTracks            TimeTrack[]
+}
+
+enum TaskStatus {
+    NOTTRACKING
+    TRACKING
+    COMPLETED
+}
+
+model TimeTrack {
+    id        String    @id @default(cuid())
+    task      Task      @relation(fields: [taskId], references: [id])
+    taskId    String
+    startTime DateTime  @default(now())
+    endTime   DateTime?
 }

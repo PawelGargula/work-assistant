@@ -1,9 +1,7 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
 import NodeMailer from "next-auth/providers/nodemailer"
-
-const prisma = new PrismaClient()
+import prisma from "@/src/app/lib/prisma"
 
 export const {
     handlers: { GET, POST },

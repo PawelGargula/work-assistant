@@ -2,7 +2,8 @@
 
 import {
   HomeIcon,
-  DocumentDuplicateIcon,
+  ClipboardDocumentListIcon,
+  ClockIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,7 +16,12 @@ const links = [
   {
     name: 'Tasks',
     href: '/dashboard/tasks',
-    icon: DocumentDuplicateIcon,
+    icon: ClipboardDocumentListIcon,
+  },
+  {
+    name: 'Time tracks',
+    href: '/dashboard/time-tracks',
+    icon: ClockIcon,
   }
 ];
 
@@ -30,7 +36,7 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-violet-100 hover:text-violet-700 md:flex-none md:justify-start md:p-2 md:px-3",
+              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium focus-visible:outline-violet-500 hover:text-violet-600 hover:underline md:flex-none md:justify-start md:p-2 md:px-3",
               {
                 'bgc-violet-100 text-violet-600': pathname === link.href
               },

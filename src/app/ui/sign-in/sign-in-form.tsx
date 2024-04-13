@@ -11,7 +11,7 @@ export default function SignInForm() {
       <form action={dispatch} className="rounded-md bg-slate-50 p-2 text-sm">
         <input 
           aria-label='e-mail'
-          className='block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400'
+          className='block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus-visible:outline-violet-500'
           id='e-mail' 
           name='e-mail' 
           placeholder='jan.kowalski@domain.com' 
@@ -30,7 +30,7 @@ function SignInButton() {
   return (
     <div className=''>
       <button 
-        className="active:bg-violet-700 bg-violet-500 disabled:cursor-not-allowed disabled:opacity-90 focus:outline-none focus:ring focus:ring-violet-300 hover:bg-violet-600 inline-flex items-center justify-center mt-2 px-5 py-1.5 rounded-md text-white w-full" 
+        className="active:bg-violet-700 bg-violet-500 disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500 hover:bg-violet-600 inline-flex items-center justify-center mt-2 py-1.5 rounded-md text-white w-full" 
         disabled={pending} 
         type='submit' 
       >
