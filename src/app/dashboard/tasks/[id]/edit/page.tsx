@@ -1,6 +1,6 @@
 import Form from '@/src/app/ui/tasks/edit-form';
 import Breadcrumbs from '@/src/app/ui/breadcrumbs';
-import { fetchTaskById } from '@/src/app/lib/data';
+import { fetchTaskById, fetchTimeTracksByTaskId } from '@/src/app/lib/data';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { auth } from '@/auth';
@@ -17,6 +17,7 @@ export default async function Page({ params }: {params: { id: string }}) {
 
   const id = params.id;  
   const task = await fetchTaskById(id);
+  const taskTimeTracks = await fetchTimeTracksByTaskId(id);
 
   if (!task) {
     notFound();
@@ -34,7 +35,7 @@ export default async function Page({ params }: {params: { id: string }}) {
           },
         ]}
       />
-      <Form task={task} />
+      <Form task={task} taskTimeTracks={taskTimeTracks} />
     </main>
   );
 }

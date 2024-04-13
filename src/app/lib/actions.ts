@@ -170,7 +170,8 @@ export async function updateTask(id: string, prevState: UpdateTaskState, formDat
         where: {
           task: {
             userId: sessionUserId
-          }
+          },
+          endTime: null,
         },
         data: {
           endTime: new Date()
