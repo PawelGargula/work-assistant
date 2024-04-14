@@ -7,10 +7,11 @@ Increase efficiency and pleasure of your work.
 ## How it works
 
 - Sign in by email (authentication link) :heavy_check_mark:
-- Add hierarchical tasks with time estimation
-- Start/stop tracking time of current task
-- Close task
-- Continually check the status of tasks
+- Create/Edit tasks with planned completion time :heavy_check_mark:
+- Start/stop tracking time of current task :heavy_check_mark:
+- Complete task :heavy_check_mark:
+- Continually check the status of tasks :heavy_check_mark:
+- Create hierarchical Tasks
 - Check general reports of your work on dashboard
   - Planned time vs. actual tasks completion time
   - Most time-consuming tasks
