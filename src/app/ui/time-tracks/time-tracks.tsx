@@ -17,12 +17,12 @@ export default function TimeTracks({
     const plannedCompletionTimeInMs = plannedCompletionTime * 60 * 1000;
     const progress = durationSum && plannedCompletionTimeInMs && Math.floor(durationSum / plannedCompletionTimeInMs * 100);
     return (<>
-        {progress && <div className="bg-gray-50 md:p-6 p-4 rounded-md mb-4">
+        {progress ? <div className="bg-gray-50 md:p-6 p-4 rounded-md mb-4">
             <label htmlFor="tracked-planned" className='font-medium text-sm mb-1'>{progress}% (Tracked / Planned)</label>
             <progress id="tracked-planned" className="w-full [&::-webkit-progress-bar]:bg-gray-200 [&::-webkit-progress-bar]:rounded-lg [&::-webkit-progress-value]:bg-violet-500 [&::-webkit-progress-value]:rounded-lg [&::-moz-progress-bar]:bg-violet-500 [&::-moz-progress-bar]:rounded-lg" max={100} value={progress} aria-label='tracked/planned'>{progress}</progress>
-        </div>}
+        </div> : ""}
         <div className="bg-gray-50 md:p-6 p-4 rounded-md">
-            <div className="overflow-auto">
+            {timeTracksWithDuration.length > 0 ? <div className="overflow-auto">
                 <table className="min-w-full text-gray-900 md:table">
                     <thead className="rounded-lg text-left text-sm font-normal">
                     <tr>
@@ -66,7 +66,7 @@ export default function TimeTracks({
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> : <span className="font-medium text-sm">There are currently no time tracks</span>}
       </div>
     </>
     )

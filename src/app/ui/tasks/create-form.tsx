@@ -23,7 +23,7 @@ export default function Form() {
             name="title"
             type="text"
             placeholder="Enter Title"
-            className="bg-white block border border-slate-300 placeholder-slate-400 px-3 py-2 rounded-md w-full"
+            className="bg-white block border border-slate-300 focus-visible:outline-violet-500  placeholder-slate-400 px-3 py-2 rounded-md w-full"
             aria-describedby='title-error'
           />
           <div id="title-error" aria-live="polite" aria-atomic="true">
@@ -54,7 +54,7 @@ export default function Form() {
               name="hours"
               type="number"
               defaultValue={0}
-              className="bg-white block border border-slate-300 px-3 py-2 rounded-md w-full"
+              className="bg-white block border border-slate-300 focus-visible:outline-violet-500 px-3 py-2 rounded-md w-full"
               aria-describedby='hours-error'
               min={0}
             />
@@ -68,7 +68,7 @@ export default function Form() {
               name="minutes"
               type="number"
               defaultValue={0}
-              className="bg-white block border border-slate-300 px-3 py-2 rounded-md w-full"
+              className="bg-white block border border-slate-300 focus-visible:outline-violet-500  px-3 py-2 rounded-md w-full"
               aria-describedby='minutes-error'
               min={0}
               max={59}
@@ -104,7 +104,7 @@ export default function Form() {
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/dashboard/tasks"
-          className="bg-gray-100 flex font-medium h-10 hover:bg-gray-200 items-center px-4 rounded-lg text-sm text-gray-600 transition-colors"
+          className="bg-gray-100 flex focus-visible:outline-violet-500 font-medium h-10 hover:bg-gray-200 items-center px-4 rounded-lg text-sm text-gray-600 transition-colors"
         >
           Cancel
         </Link>

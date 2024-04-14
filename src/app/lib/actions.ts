@@ -124,13 +124,6 @@ export async function updateTask(id: string, prevState: UpdateTaskState, formDat
     };
   }
 
-  const prevTask = await fetchTaskById(id);
-  if (prevTask?.userId !== sessionUserId) {
-    return {
-      message: 'Failed to Update Task.',
-    }
-  }
-
   // Validate form using Zod
   const validatedFields = UpdateTask.safeParse({
     title: formData.get('title'),
@@ -154,6 +147,8 @@ export async function updateTask(id: string, prevState: UpdateTaskState, formDat
 
   // Insert data into the database
   try {
+    const prevTask = await fetchTaskById(id);
+
     const isStatusChanged = prevTask?.status !== status;
     if (isStatusChanged && status === TaskStatus.TRACKING) {
       // Cleanup other active tasks and it's timeTracks
@@ -220,4 +215,153 @@ export async function updateTask(id: string, prevState: UpdateTaskState, formDat
   // Revalidate the cache for the tasks page and redirect the tasks.
   revalidatePath('/dashboard/tasks');
   redirect('/dashboard/tasks');
+}
+
+export async function startTrackingTask(id: string) {
+  const session = await auth();
+  const sessionUserId = session?.user?.id;
+  const isLoggedIn = !!sessionUserId;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  try {
+    const prevTask = await fetchTaskById(id);
+
+    const isStatusChanged = prevTask?.status !== TaskStatus.TRACKING;
+    if (!isStatusChanged) return;
+
+    // Cleanup other active tasks and it's timeTracks
+    await prisma.task.updateMany({
+      where: {
+        userId: sessionUserId,
+        status: TaskStatus.TRACKING,
+      },
+      data: {
+        status: TaskStatus.NOTTRACKING
+      }
+    });
+
+    await prisma.timeTrack.updateMany({
+      where: {
+        task: {
+          userId: sessionUserId
+        },
+        endTime: null,
+      },
+      data: {
+        endTime: new Date()
+      }
+    });
+
+    // Setup
+    await prisma.timeTrack.create({
+      data: {
+        taskId: id
+      }
+    });
+
+    await prisma.task.update({
+      where: {
+        id: id
+      },
+      data: {
+        status: TaskStatus.TRACKING
+      }
+    });
+
+    // Revalidate the cache for the tasks page.
+    revalidatePath('/dashboard/tasks');
+  } catch (error) {
+    return { message: 'Database Error: Failed to start tracking Task.' };
+  }
+}
+
+export async function setTaskStatusAsNotTracking(id: string) {
+  const session = await auth();
+  const sessionUserId = session?.user?.id;
+  const isLoggedIn = !!sessionUserId;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  try {
+    const prevTask = await fetchTaskById(id);
+
+    const isStatusChanged = prevTask?.status !== TaskStatus.NOTTRACKING;
+    if (!isStatusChanged) return;
+
+    await prisma.timeTrack.updateMany({
+      where: {
+        taskId: id,
+        endTime: null
+      },
+      data: {
+        endTime: new Date()
+      }
+    });
+
+    await prisma.task.update({
+      where: {
+        id: id
+      },
+      data: {
+        status: TaskStatus.NOTTRACKING
+      }
+    });
+
+    // Revalidate the cache for the tasks page.
+    revalidatePath('/dashboard/tasks');
+  } catch (error) {
+    return { message: 'Database Error: Failed to set Task status to Not tracking.' };
+  }
+}
+
+export async function completeTask(id: string) {
+  const session = await auth();
+  const sessionUserId = session?.user?.id;
+  const isLoggedIn = !!sessionUserId;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  try {
+    const prevTask = await fetchTaskById(id);
+
+    const isStatusChanged = prevTask?.status !== TaskStatus.COMPLETED;
+    if (!isStatusChanged) return;
+
+    await prisma.timeTrack.updateMany({
+      where: {
+        taskId: id,
+        endTime: null
+      },
+      data: {
+        endTime: new Date()
+      }
+    });
+
+    await prisma.task.update({
+      where: {
+        id: id
+      },
+      data: {
+        status: TaskStatus.COMPLETED
+      }
+    });
+
+    // Revalidate the cache for the tasks page.
+    revalidatePath('/dashboard/tasks');
+  } catch (error) {
+    return { message: 'Database Error: Failed to complete Task.' };
+  }
 }

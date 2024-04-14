@@ -1,5 +1,10 @@
 import { auth } from '@/auth';
-import { redirect } from 'next/navigation'
+import { redirect } from 'next/navigation';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home',
+}
  
 export default async function Page() {
   const session = await auth();
@@ -8,7 +13,7 @@ export default async function Page() {
   
   return (
     <>
-      <h1 className='text-lg'>Dashboard</h1>
+      <h1 className='text-lg'>Welcome {session?.user?.email}</h1>
     </>
   );
 }
