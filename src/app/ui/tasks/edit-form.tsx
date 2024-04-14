@@ -41,7 +41,7 @@ export default function EditTaskForm({
           <div className="bg-gray-50 md:p-6 p-4 rounded-md">
             {/* Status */}
             <p className='font-medium mb-2 text-sm'>Status</p>
-            <div className="mb-4 flex flex-wrap gap-3 text-sm">
+            <div className="mb-4 flex flex-wrap gap-3">
               <label className='cursor-pointer flex gap-2 items-center ring-slate-300 has-[:checked]:ring-slate-600 has-[:checked]:text-slate-600 rounded-lg p-2 ring-1 ring-transparent hover:text-slate-600' htmlFor="not-tracking">
                 <PauseCircleIcon className="w-5"/>
                 Not tracking
@@ -162,7 +162,7 @@ export default function EditTaskForm({
         </form>
       </Tab>
       <Tab key='time-tracks' title='Time tracks'>
-        <TimeTracks timeTracks={taskTimeTracks}/>
+        <TimeTracks timeTracks={taskTimeTracks} plannedCompletionTime={task.plannedCompletionTime}/>
       </Tab>
     </Tabs>
   );

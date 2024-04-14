@@ -30,7 +30,7 @@ const CreateTaskFormSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "Title is required" }),
-  minutes: z.coerce.number().int().nonnegative().lt(59),
+  minutes: z.coerce.number().int().nonnegative().lte(59),
   hours: z.coerce.number().int().nonnegative(),
   userId: z.string().cuid(),
   createdAt: z.string(),
