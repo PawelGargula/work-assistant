@@ -11,6 +11,7 @@ Increase efficiency and pleasure of your work.
 - Start/stop tracking time of current task :heavy_check_mark:
 - Complete task :heavy_check_mark:
 - Continually check the status of tasks :heavy_check_mark:
+- Check all your "Time tracks" and edit it if you need to :heavy_check_mark:
 - Create hierarchical Tasks
 - Check general reports of your work on dashboard
   - Planned time vs. actual tasks completion time
