@@ -1,8 +1,8 @@
 import { UpdateTimeTrack } from '@/src/app/ui/time-tracks/buttons';
 import { fetchFilteredTimeTracks } from '@/src/app/lib/data';
-import { formatDateToLocal } from '../../lib/utils';
+import ClientLocalDate from '@/src/app/ui/time-tracks/client-local-time';
 
-export default async function CustomersTable({
+export default async function TimeTracksTable({
   query,
   currentPage,
 }: {
@@ -41,10 +41,10 @@ export default async function CustomersTable({
                         {timeTrack.task.title}
                       </td>
                       <td className="whitespace-nowrap px-4 py-5 text-sm">
-                        {formatDateToLocal(timeTrack.startTime)}
+                        <ClientLocalDate date={timeTrack.startTime}/>
                       </td>
                       <td className="whitespace-nowrap px-4 py-5 text-sm">
-                        {formatDateToLocal(timeTrack.endTime)}
+                        <ClientLocalDate date={timeTrack.endTime}/>
                       </td>
                       <td className="whitespace-nowrap py-3 pl-6 pr-3">
                         <div className="flex justify-end gap-3">
