@@ -7,7 +7,8 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import prisma from '@/src/app/lib/prisma';
 import { TaskStatus } from '@prisma/client';
-import { fetchTaskById } from '@/src/app/lib/data';
+import { fetchTaskById, fetchTimeTrackById } from '@/src/app/lib/data';
+import { formatDateToLocal } from './utils';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -23,6 +24,8 @@ export async function authenticate(
     throw error;
   }
 }
+
+// Tasks
 
 const CreateTaskFormSchema = z.object({
   id: z.string().cuid(),
@@ -148,6 +151,12 @@ export async function updateTask(id: string, prevState: UpdateTaskState, formDat
   // Insert data into the database
   try {
     const prevTask = await fetchTaskById(id);
+
+    if (!prevTask) {
+      return {
+        message: 'Failed to Update Task.',
+      };
+    }
 
     const isStatusChanged = prevTask?.status !== status;
     if (isStatusChanged && status === TaskStatus.TRACKING) {
@@ -364,4 +373,133 @@ export async function completeTask(id: string) {
   } catch (error) {
     return { message: 'Database Error: Failed to complete Task.' };
   }
+}
+
+// Time tracks
+const TimeTrackFormSchema = z.object({
+  id: z.string().cuid(),
+  startTime: z.string().datetime(),
+  endTime: z.string().datetime(),
+});
+
+const UpdateTimeTrack = TimeTrackFormSchema.omit({ id: true });
+
+export type UpdateTimeTrackState = {
+  errors?: {
+    startTime?: string[];
+    endTime?: string[];
+  };
+  message?: string | null;
+}
+
+export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackState, formData: FormData) {
+  const session = await auth();
+  const sessionUserId = session?.user?.id;
+  const isLoggedIn = !!sessionUserId;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  const startTimeFromForm = formData.get('start-time');
+  const endTimeFromForm = formData.get('end-time');
+  if (!startTimeFromForm || typeof startTimeFromForm !== "string") {
+    return {
+      errors: {
+        startTime: [
+          "Invalid Start time format"
+        ]
+      }
+    };
+  }
+  if (!endTimeFromForm || typeof endTimeFromForm !== "string") {
+    return {
+      errors: {
+        endTime: [
+          "Invalid End time format"
+        ]
+      }
+    };
+  }
+
+  // Validate form using Zod
+  const validatedFields = UpdateTimeTrack.safeParse({
+    startTime: new Date(startTimeFromForm).toISOString(),
+    endTime: new Date(endTimeFromForm).toISOString(),
+  });
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Time track.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { startTime, endTime } = validatedFields.data;
+
+  // Additional validation
+  if (endTime < startTime) {
+    return {
+      message: "End can't be before Start",
+    };
+  }
+
+  // Insert data into the database
+  try {
+    // Additional validation
+    const prevTimeTrack = await fetchTimeTrackById(id);
+    if (!prevTimeTrack) {
+      return {
+        message: 'Failed to Update Time track.',
+      };
+    }
+
+    const timeTrackOccupied = await prisma.timeTrack.findFirst({
+      where: {
+        OR: [
+          { id: { not: id }, startTime: { lte: startTime }, endTime: { gte: startTime } }, // Start time inside other
+          { id: { not: id }, startTime: { lte: endTime }, endTime: { gte: endTime } }, // End time inside other
+          { id: { not: id }, startTime: { gte: startTime , lte: endTime} }, // Other Start time between saving Start and End
+          { id: { not: id }, startTime: { lte: endTime }, endTime: null } // Saving End time after active (curently tracking) Time track Start
+        ],
+      },
+      include: {
+        task: {
+          select: {
+            title: true,
+          }
+        }
+      },
+    });
+
+    if (timeTrackOccupied !== null) {
+      return {
+        message: `Period is already occupied by other Time track, on Task "${timeTrackOccupied.task.title}" with Start at ${formatDateToLocal(timeTrackOccupied.startTime)} and End at ${formatDateToLocal(timeTrackOccupied.endTime)}`,
+      };
+    }
+
+    await prisma.timeTrack.update({
+      data: {
+        startTime: startTime,
+        endTime: endTime
+      },
+      where: {
+        id: id
+      }
+    })
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+
+    return {
+      message: 'Database Error: Failed to Update Time track.',
+    };
+  }
+
+  // Revalidate the cache for the tasks page and redirect the tasks.
+  revalidatePath('/dashboard/time-tracks');
+  redirect('/dashboard/time-tracks');
 }

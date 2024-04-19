@@ -4,6 +4,7 @@ import { auth } from '@/auth';
 
 const ITEMS_PER_PAGE = 6;
 
+// Tasks
 export async function fetchFilteredTasks(
   query: string, 
   currentPage: number
@@ -34,7 +35,7 @@ export async function fetchFilteredTasks(
     return tasks;
   } catch (err) {
     console.error('Database Error:', err);
-    throw new Error('Failed to fetch customer table.');
+    throw new Error('Failed to fetch Tasks table.');
   }
 }
 
@@ -101,5 +102,106 @@ export async function fetchTimeTracksByTaskId(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch Time Tracks by Task id.');
+  }
+}
+
+// Time tracks
+export async function fetchFilteredTimeTracks(
+  query: string, 
+  currentPage: number
+) {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  const skip = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const timeTracks = await prisma.timeTrack.findMany({
+      where: {
+        task: {
+          userId: userId,
+          title: {
+            contains: query,
+            mode: 'insensitive'
+          }
+        }
+      },
+      orderBy: {
+        startTime: 'desc'
+      },
+      skip: skip,
+      take: ITEMS_PER_PAGE,
+      include: {
+        task: {
+          select: {
+            title: true,
+          }
+        }
+      }
+    });
+
+    return timeTracks;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch Time tracks table.');
+  }
+}
+
+export async function fetchTimeTracksPages(query: string) {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  try {
+    const count = await prisma.timeTrack.count({
+      where: {
+        task: {
+          userId: userId,
+          title: {
+            contains: query,
+            mode: 'insensitive'
+          }
+        }
+      }
+    });
+
+    const totalPages = Math.ceil(Number(count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of time tracks.');
+  }
+}
+
+export async function fetchTimeTrackById(id: string) {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  try {
+    const timeTrack = await prisma.timeTrack.findUnique({
+      where: {
+        id: id,
+        task: {
+          userId: userId,
+        }
+      },
+      include: {
+        task: {
+          select: {
+            title: true,
+          }
+        }
+      }
+    });
+
+    return timeTrack;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch Time track.');
   }
 }

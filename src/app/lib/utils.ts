@@ -4,6 +4,19 @@ export const formatDateToLocal = (date: Date | null) => {
         : "-"
 };
 
+export const formatDateForDateTimeLocalInput = (date: Date | null) => {
+  if(!date) return "";
+  const serverDateTime = new Date(date);
+  const year = serverDateTime.getFullYear().toString().padStart(4, '0');
+  const month = (serverDateTime.getMonth() + 1).toString().padStart(2, '0');
+  const day = serverDateTime.getDate().toString().padStart(2, '0');
+  const hours = serverDateTime.getHours().toString().padStart(2, '0');
+  const minutes = serverDateTime.getMinutes().toString().padStart(2, '0');
+
+  const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+  return formattedDateTime;
+}
+
 export const getTimeDuration = (startTime: Date, endTime: Date | null) => {
     endTime = endTime ?? new Date();
     const duration = +endTime - +startTime;

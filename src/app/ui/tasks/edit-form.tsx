@@ -8,7 +8,7 @@ import Description from '@/src/app/ui/tasks/rich-text/description';
 import { Task, TimeTrack } from '@prisma/client';
 import { PauseCircleIcon, PlayCircleIcon, StopCircleIcon, PlayPauseIcon } from '@heroicons/react/24/outline';
 import { TaskStatus } from '@prisma/client';
-import TimeTracks from '@/src/app/ui/time-tracks/time-tracks';
+import TimeTracks from '@/src/app/ui/tasks/time-tracks';
 import {Tabs, Tab} from "@nextui-org/react";
 
 export default function EditTaskForm({
