@@ -99,9 +99,9 @@ export default function EditTimeTrackForm({
 
                 {/* Error summary */}
                 <div id="edit-error" aria-live="polite" aria-atomic="true">
-                    {state.timeTrackOccupied?.title && 
+                    {state.state?.timeTrackOccupied?.title && 
                         <p className="mt-2 text-sm text-red-500">
-                            {`Period is already occupied by other Time track, on Task "${state.timeTrackOccupied.title}" with Start at ${formatDateToLocal(state.timeTrackOccupied.startTime)} and End at ${formatDateToLocal(state.timeTrackOccupied.endTime)}`}
+                            {`Period is already occupied by other Time track, on Task "${state.state?.timeTrackOccupied.title}" with Start at ${formatDateToLocal(state.state?.timeTrackOccupied.startTime)} and End at ${formatDateToLocal(state.state?.timeTrackOccupied.endTime)}`}
                         </p>
                     }
                     {state.message && 

@@ -390,9 +390,9 @@ export type UpdateTimeTrackState = {
   };
   message?: string | null;
   timeTrackOccupied?: {
-    taskTitle?: string,
-    startTime?: string,
-    endTime?: string,
+    taskTitle?: string | null,
+    startTime?: string | null,
+    endTime?: string | null,
   };
 }
 
@@ -461,10 +461,12 @@ export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackStat
 
     if (timeTrackOccupied !== null) {
       return {
-        timeTrackOccupied: {
-          title: timeTrackOccupied.task.title,
-          startTime: timeTrackOccupied.startTime,
-          endTime: timeTrackOccupied.endTime
+        state: {
+          timeTrackOccupied: {
+            title: timeTrackOccupied.task.title,
+            startTime: timeTrackOccupied.startTime,
+            endTime: timeTrackOccupied.endTime
+          }
         }
       };
     }
