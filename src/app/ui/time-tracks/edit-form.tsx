@@ -28,10 +28,7 @@ export default function EditTimeTrackForm({
     const [endTime, setEndTime] = useState(timeTrack.endTime);
 
     return (
-        <form onSubmit={(e) => {
-            e.preventDefault();
-
-            const formData = new FormData();
+        <form action={(formData) => {
             formData.set("start-time", startTime.toISOString());
             formData.set("end-time", endTime?.toISOString() ?? "");
 
