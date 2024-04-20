@@ -8,7 +8,6 @@ import { z } from "zod";
 import prisma from '@/src/app/lib/prisma';
 import { TaskStatus } from '@prisma/client';
 import { fetchTaskById, fetchTimeTrackById } from '@/src/app/lib/data';
-import { formatDateToLocal } from './utils';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -390,6 +389,11 @@ export type UpdateTimeTrackState = {
     endTime?: string[];
   };
   message?: string | null;
+  timeTrackOccupied?: {
+    taskTitle?: string,
+    startTime?: string,
+    endTime?: string,
+  };
 }
 
 export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackState, formData: FormData) {
@@ -403,31 +407,10 @@ export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackStat
     };
   }
 
-  const startTimeFromForm = formData.get('start-time');
-  const endTimeFromForm = formData.get('end-time');
-  if (!startTimeFromForm || typeof startTimeFromForm !== "string") {
-    return {
-      errors: {
-        startTime: [
-          "Invalid Start time format"
-        ]
-      }
-    };
-  }
-  if (!endTimeFromForm || typeof endTimeFromForm !== "string") {
-    return {
-      errors: {
-        endTime: [
-          "Invalid End time format"
-        ]
-      }
-    };
-  }
-
   // Validate form using Zod
   const validatedFields = UpdateTimeTrack.safeParse({
-    startTime: new Date(startTimeFromForm).toISOString(),
-    endTime: new Date(endTimeFromForm).toISOString(),
+    startTime: formData.get('start-time'),
+    endTime: formData.get('end-time'),
   });
 
   // If form validation fails, return errors early. Otherwise, continue.
@@ -478,7 +461,11 @@ export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackStat
 
     if (timeTrackOccupied !== null) {
       return {
-        message: `Period is already occupied by other Time track, on Task "${timeTrackOccupied.task.title}" with Start at ${formatDateToLocal(timeTrackOccupied.startTime)} and End at ${formatDateToLocal(timeTrackOccupied.endTime)}`,
+        timeTrackOccupied: {
+          title: timeTrackOccupied.task.title,
+          startTime: timeTrackOccupied.startTime,
+          endTime: timeTrackOccupied.endTime
+        }
       };
     }
 

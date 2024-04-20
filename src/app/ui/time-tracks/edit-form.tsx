@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { Button } from '@/src/app/ui/button';
 import { updateTimeTrack } from '@/src/app/lib/actions';
 import { useFormState } from 'react-dom';
-import { formatDateForDateTimeLocalInput } from '../../lib/utils';
+import { formatDateForDateTimeLocalInput, formatDateToLocal } from '@/src/app/lib/utils';
+import { useState } from 'react';
 
 type TimeTrackWithTaskTitle = {
     id: string,
@@ -15,17 +16,27 @@ type TimeTrackWithTaskTitle = {
     }
 }
 
-export default function EditTaskForm({
+export default function EditTimeTrackForm({
     timeTrack
 } : {
     timeTrack: TimeTrackWithTaskTitle
 }) {
-    const initialState = { message: "", errors: {} };
+    const initialState = { message: "", errors: {}, timeTrackOccupied: {} };
     const updateTimeTrackWithId = updateTimeTrack.bind(null, timeTrack.id);
     const [state, dispatch] = useFormState(updateTimeTrackWithId, initialState);
+    const [startTime, setStartTime] = useState(timeTrack.startTime);
+    const [endTime, setEndTime] = useState(timeTrack.endTime);
 
     return (
-        <form action={dispatch} aria-describedby='create-error'>
+        <form onSubmit={(e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.set("start-time", startTime.toISOString());
+            formData.set("end-time", endTime?.toISOString() ?? "");
+
+            dispatch(formData);
+        }} aria-describedby='edit-error'>
             <div className="bg-gray-50 md:p-6 p-4 rounded-md">
                 {/* Task title */}
                 <div className="mb-4">
@@ -41,13 +52,14 @@ export default function EditTaskForm({
                             Start
                         </label>
                         <input
-                        aria-describedby='start-time-error'
-                        className="bg-white block border border-slate-300 focus-visible:outline-violet-500 placeholder-slate-400 px-3 py-2 rounded-md w-full"
-                        defaultValue={formatDateForDateTimeLocalInput(timeTrack.startTime)}
-                        id="start-time"
-                        name="start-time"
-                        placeholder="Enter Start"
-                        type="datetime-local"
+                            aria-describedby='start-time-error'
+                            className="bg-white block border border-slate-300 focus-visible:outline-violet-500 placeholder-slate-400 px-3 py-2 rounded-md w-full"
+                            id="start-time"
+                            name="start-time"
+                            onChange={(e) => setStartTime(new Date(e.target.value))}
+                            placeholder="Enter Start"
+                            type="datetime-local"
+                            value={formatDateForDateTimeLocalInput(startTime)}
                         />
                         <div id="start-time-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.startTime &&
@@ -65,13 +77,14 @@ export default function EditTaskForm({
                             End
                         </label>
                         <input
-                        aria-describedby='end-time-error'
-                        className="bg-white block border border-slate-300 focus-visible:outline-violet-500 placeholder-slate-400 px-3 py-2 rounded-md w-full"
-                        defaultValue={formatDateForDateTimeLocalInput(timeTrack.endTime)}
-                        id="end-time"
-                        name="end-time"
-                        placeholder="Enter End"
-                        type="datetime-local"
+                            aria-describedby='end-time-error'
+                            className="bg-white block border border-slate-300 focus-visible:outline-violet-500 placeholder-slate-400 px-3 py-2 rounded-md w-full"
+                            id="end-time"
+                            name="end-time"
+                            onChange={(e) => setEndTime(new Date(e.target.value))}
+                            placeholder="Enter End"
+                            type="datetime-local"
+                            value={formatDateForDateTimeLocalInput(endTime)}
                         />
                         <div id="end-time-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.endTime &&
@@ -85,7 +98,12 @@ export default function EditTaskForm({
                 </div>
 
                 {/* Error summary */}
-                <div id="create-error" aria-live="polite" aria-atomic="true">
+                <div id="edit-error" aria-live="polite" aria-atomic="true">
+                    {state.timeTrackOccupied?.title && 
+                        <p className="mt-2 text-sm text-red-500">
+                            {`Period is already occupied by other Time track, on Task "${state.timeTrackOccupied.title}" with Start at ${formatDateToLocal(state.timeTrackOccupied.startTime)} and End at ${formatDateToLocal(state.timeTrackOccupied.endTime)}`}
+                        </p>
+                    }
                     {state.message && 
                         <p className="mt-2 text-sm text-red-500">
                             {state.message}
