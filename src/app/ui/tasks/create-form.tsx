@@ -5,10 +5,13 @@ import { Button } from '@/src/app/ui/button';
 import { createTask } from '@/src/app/lib/actions';
 import { useFormState } from 'react-dom';
 import Description from '@/src/app/ui/tasks/rich-text/description';
+import { useState } from 'react';
 
 export default function Form() {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(createTask, initialState);
+
+  const [description, setDescription] = useState("");
 
   return (
     <form action={dispatch} aria-describedby='create-error'>
@@ -38,7 +41,7 @@ export default function Form() {
 
         {/* Description */}
         <div className="mb-4">
-              <Description defaultValue=""/>
+              <Description description={description} setDescription={setDescription} />
         </div>
 
         {/* Planned comletion time */}

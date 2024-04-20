@@ -10,6 +10,7 @@ import { PauseCircleIcon, PlayCircleIcon, StopCircleIcon, PlayPauseIcon } from '
 import { TaskStatus } from '@prisma/client';
 import TimeTracks from '@/src/app/ui/tasks/time-tracks';
 import {Tabs, Tab} from "@nextui-org/react";
+import { useState } from 'react';
 
 export default function EditTaskForm({
   task,
@@ -24,6 +25,12 @@ export default function EditTaskForm({
 
   const defaultHours = Math.floor(task.plannedCompletionTime / 60);
   const defaultMinutes = task.plannedCompletionTime % 60;
+
+  const [status, setStatus] = useState(task.status);
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description);
+  const [hours, setHours] = useState(defaultHours.toString());
+  const [minutes, setMinutes] = useState(defaultMinutes.toString());
 
   return (
     <Tabs 
@@ -45,19 +52,19 @@ export default function EditTaskForm({
               <label className='cursor-pointer flex gap-2 items-center ring-slate-300 has-[:checked]:ring-slate-600 has-[:checked]:text-slate-600 rounded-lg p-2 ring-1 ring-transparent hover:text-slate-600' htmlFor="not-tracking">
                 <PauseCircleIcon className="w-5"/>
                 Not tracking
-                <input className='appearance-none' type="radio" name="status" id="not-tracking" value={TaskStatus.NOTTRACKING} defaultChecked={task.status === TaskStatus.NOTTRACKING} />
+                <input className='appearance-none' type="radio" name="status" id="not-tracking" value={TaskStatus.NOTTRACKING} checked={status === TaskStatus.NOTTRACKING} onClick={(e => setStatus(TaskStatus.NOTTRACKING))}/>
               </label>
 
               <label className='cursor-pointer flex gap-2 ring-slate-300 has-[:checked]:ring-green-600 has-[:checked]:text-green-600 rounded-lg p-2 ring-1 ring-transparent hover:text-green-600' htmlFor="tracking">
                 <PlayCircleIcon className="w-5"/>
                 Tracking
-                <input className='appearance-none' type="radio" name="status" id="tracking" value={TaskStatus.TRACKING} defaultChecked={task.status === TaskStatus.TRACKING} />
+                <input className='appearance-none' type="radio" name="status" id="tracking" value={TaskStatus.TRACKING} checked={status === TaskStatus.TRACKING} onClick={(e => setStatus(TaskStatus.TRACKING))} />
               </label>
 
               <label className='cursor-pointer flex gap-2 ring-slate-300 has-[:checked]:ring-violet-700 has-[:checked]:text-violet-700 rounded-lg p-2 ring-1 ring-transparent hover:text-violet-700' htmlFor="completed">
                 <StopCircleIcon className="w-5"/>
                 Completed
-                <input className='appearance-none' type="radio" name="status" id="completed" value={TaskStatus.COMPLETED} defaultChecked={task.status === TaskStatus.COMPLETED} />
+                <input className='appearance-none' type="radio" name="status" id="completed" value={TaskStatus.COMPLETED} checked={status === TaskStatus.COMPLETED} onClick={(e => setStatus(TaskStatus.COMPLETED))} />
               </label>
             </div>
 
@@ -69,7 +76,8 @@ export default function EditTaskForm({
               <input
                 aria-describedby='title-error'
                 className="bg-white block border border-slate-300 focus-visible:outline-violet-500 placeholder-slate-400 px-3 py-2 rounded-md w-full"
-                defaultValue={task.title}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 id="title"
                 name="title"
                 placeholder="Enter Title"
@@ -87,7 +95,7 @@ export default function EditTaskForm({
 
             {/* Description */}
             <div className="mb-4">
-                  <Description defaultValue={task.description} />
+                  <Description description={description} setDescription={setDescription} />
             </div>
 
             {/* Planned comletion time */}
@@ -102,7 +110,8 @@ export default function EditTaskForm({
                   id="hours"
                   name="hours"
                   type="number"
-                  defaultValue={defaultHours}
+                  value={hours}
+                  onChange={(e) => setHours(e.target.value)}
                   className="bg-white block border border-slate-300 focus-visible:outline-violet-500 px-3 py-2 rounded-md w-full"
                   aria-describedby='hours-error'
                   min={0}
@@ -116,7 +125,8 @@ export default function EditTaskForm({
                   id="minutes"
                   name="minutes"
                   type="number"
-                  defaultValue={defaultMinutes}
+                  value={minutes}
+                  onChange={(e) => setMinutes(e.target.value)}
                   className="bg-white block border border-slate-300 focus-visible:outline-violet-500 px-3 py-2 rounded-md w-full"
                   aria-describedby='minutes-error'
                   min={0}

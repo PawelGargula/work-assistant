@@ -9,12 +9,12 @@ import OrderedList from "@tiptap/extension-ordered-list"
 import { useState } from 'react';
 
 export default function Description({
-  defaultValue
+  description,
+  setDescription
 } : {
-  defaultValue: string
+  description: string,
+  setDescription: (value: string) => void
 }) {
-  const [description, setDescription] = useState(defaultValue);
-
   const editor = useEditor({
     extensions: [
       StarterKit.configure({}),
