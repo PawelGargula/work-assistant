@@ -49,8 +49,7 @@ export function StartTrackingTask({ id }: { id: string }) {
 function StartTrackingTaskButton() {
   const { pending } = useFormStatus(); 
   return (
-    <button className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-green-600 p-2 rounded-md" disabled={pending} type='submit'>
-      <span className="sr-only">Start tracking task</span>
+    <button aria-label='Start tracking task' className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-green-600 p-2 rounded-md" disabled={pending} type='submit'>
       {pending 
         ? <PendingAnimation />
         : <PlayCircleIcon className="w-5" />
@@ -71,8 +70,7 @@ export function SetTaskStatusAsNotTracking({ id }: { id: string }) {
 function SetTaskStatusAsNotTrackingButton() {
   const { pending } = useFormStatus(); 
   return (
-    <button className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-slate-600 p-2 rounded-md" disabled={pending} type='submit'>
-      <span className="sr-only">Set task status as Not tracking</span>
+    <button aria-label='Set task status as Not tracking' className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-slate-600 p-2 rounded-md" disabled={pending} type='submit'>
       {pending 
         ? <PendingAnimation />
         : <PauseCircleIcon className="w-5" />
@@ -93,8 +91,7 @@ export function CompleteTask({ id }: { id: string }) {
 function CompleteTaskButton() {
   const { pending } = useFormStatus(); 
   return (
-    <button className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-violet-700 p-2 rounded-md" disabled={pending} type='submit'>
-      <span className="sr-only">Complete Task</span>
+    <button aria-label='Complete Task' className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-violet-700 p-2 rounded-md" disabled={pending} type='submit'>
       {pending 
         ? <PendingAnimation />
         : <StopCircleIcon className="w-5" />

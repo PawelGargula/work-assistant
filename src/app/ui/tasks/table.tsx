@@ -3,7 +3,7 @@ import { fetchFilteredTasks } from '@/src/app/lib/data';
 import clsx from 'clsx';
 import { TaskStatus } from '@prisma/client';
 
-export default async function CustomersTable({
+export default async function TasksTable({
   query,
   currentPage,
 }: {
