@@ -5,8 +5,12 @@ import "@/src/app/ui/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Work assistant",
+  title: {
+    template: '%s | Work assistant',
+    default: 'Work assistant',
+  },
   description: "Increase efficiency and pleasure of your work.",
+  metadataBase: new URL('https://work-assistant-puce.vercel.app'),
 };
 
 export default async function RootLayout({

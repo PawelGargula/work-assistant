@@ -8,7 +8,7 @@ export default function SignInForm() {
  
   return (
     <>
-      <form action={dispatch} className="rounded-md bg-slate-50 p-2 text-sm">
+      <form action={dispatch} className="rounded-md bg-white p-2 text-sm">
         <input 
           aria-label='e-mail'
           className='block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus-visible:outline-violet-500'
