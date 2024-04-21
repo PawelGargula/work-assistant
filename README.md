@@ -21,3 +21,7 @@ Increase efficiency and pleasure of your work.
 - Pomodoro timer working on background, tells you when you should make a break, change position and so on
   - Configure interval
   - Configure break messages
+
+## Screenshot
+
+![Home](screenshots/opengraph-image.png)
