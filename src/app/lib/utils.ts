@@ -24,7 +24,7 @@ export const getTimeDuration = (startTime: Date, endTime: Date | null) => {
 }
 
 export const formatTimeDuration = (duration: number) => {
-    const hours = Math.floor((duration % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const hours = Math.floor((duration / (1000 * 60 * 60)));
     const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
     return `${hours}:${minutes.toString().padStart(2, '0')}`
 };

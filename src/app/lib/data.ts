@@ -1,8 +1,116 @@
 import { unstable_noStore as noStore } from 'next/cache';
 import prisma from '@/src/app/lib/prisma';
 import { auth } from '@/auth';
+import { TaskStatus } from '@prisma/client';
+import { getTimeDuration } from './utils';
 
 const ITEMS_PER_PAGE = 6;
+
+// Dashboard
+export async function fetchCardData() {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  try {
+    const numberOfTasksPromise = prisma.task.count({
+      where: {
+        userId: userId,
+      }
+    });
+
+    const timeTracksPromise = prisma.timeTrack.findMany({
+      where: {
+        task: {
+          userId: userId
+        }
+      }
+    });
+
+    const completedTasksPlannedTimeSumPromise = prisma.task.aggregate({
+      where: {
+        userId: userId,
+        status: TaskStatus.COMPLETED,
+        plannedCompletionTime: { not: 0 },
+      },
+      _sum: {
+        plannedCompletionTime: true
+      },
+    });
+
+    const completedTimeTracksPromise = prisma.timeTrack.findMany({
+      where: {
+        task: {
+          userId: userId,
+          status: TaskStatus.COMPLETED,
+          plannedCompletionTime: { not: 0 },
+        }
+      }
+    })
+
+    const data = await Promise.all([
+      numberOfTasksPromise,
+      timeTracksPromise,
+      completedTasksPlannedTimeSumPromise,
+      completedTimeTracksPromise
+    ]);
+
+    const numberOfTasks = Number(data[0]);
+    const trackedInMs = data[1].reduce(
+      (sum, currentTimeTrack) => sum + getTimeDuration(currentTimeTrack.startTime, currentTimeTrack.endTime), 
+      0
+    );
+
+    const trackedHours = Math.floor((trackedInMs / (1000 * 60 * 60)));
+    
+    const completedTasksPlannedTimeSum = data[2]._sum.plannedCompletionTime ?? 0;
+    const completedPlannedInMs = completedTasksPlannedTimeSum * 60 * 1000;
+    const completedTrackedInMs = data[3].reduce(
+      (sum, currentTimeTrack) => sum + getTimeDuration(currentTimeTrack.startTime, currentTimeTrack.endTime), 
+      0
+    );
+
+    const trackedVsPlanned = completedTrackedInMs && completedPlannedInMs &&  Math.floor(completedTrackedInMs / completedPlannedInMs * 100)
+
+    return {
+      numberOfTasks,
+      trackedHours,
+      trackedVsPlanned,
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch card data.');
+  }
+}
+
+export async function fetchLatestTimeTracks() {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  const latestTimeTrackDateNumber = new Date().setUTCHours(0,0,0,0) - (7 * 24 * 60 * 60 * 1000);
+  const latestTimeTrackDate = new Date(latestTimeTrackDateNumber).toISOString();
+  try {
+    const timeTracks = await prisma.timeTrack.findMany({
+      where: {
+        task: {
+          userId: userId,
+        },
+        OR: [
+          { endTime: { gte: latestTimeTrackDate} },
+          { endTime: null }
+        ]
+      },
+    });
+
+    return timeTracks;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch latest Time tracks.');
+  }
+}
 
 // Tasks
 export async function fetchFilteredTasks(
