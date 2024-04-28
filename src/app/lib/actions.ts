@@ -431,6 +431,12 @@ export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackStat
     };
   }
 
+  if (endTime > new Date().toISOString()) {
+    return {
+      message: "End can't be in the future",
+    };
+  }
+
   // Insert data into the database
   try {
     // Additional validation

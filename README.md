@@ -25,3 +25,4 @@ Increase efficiency and pleasure of your work.
 ## Screenshot
 
 ![Home](screenshots/opengraph-image.png)
+![Dashboard](screenshots/work-assistant-dashboard.png)

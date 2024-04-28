@@ -61,11 +61,11 @@ export default function TrackingChart({
   return (
     <div className="w-full">
       {<div className="rounded-xl bg-gray-50 p-4">
-      <div className="flex p-4 pl-2 pt-2">
-          <CalendarIcon className="h-5 w-5 text-gray-500" />
-          <h3 className="ml-2 text-sm font-medium">Time tracks by last 7 days</h3>
-      </div>
-        <ResponsiveContainer className='bg-white p-6 pb-3 pl-0 rounded-xl' width="100%" height="100%" minHeight={350}>
+        <div className="flex p-4 pl-2 pt-2">
+            <CalendarIcon className="h-5 w-5 text-gray-700" />
+            <h3 className="ml-2 text-sm font-medium">Time tracks by last 7 days</h3>
+        </div>
+        <ResponsiveContainer className='bg-white p-6 pb-3 pl-0 rounded-xl text-sm' width="100%" height="100%" minHeight={350}>
           <BarChart data={timeTracksByDay}>
             <XAxis dataKey="day" tickFormatter={(value) => new Date().toLocaleDateString() === value ? 'Today' : value}/>
             <YAxis tickFormatter={value => formatTimeDuration(value)} />

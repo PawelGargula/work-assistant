@@ -7,13 +7,14 @@ export default function DashboardSkeleton() {
   return (
     <>
       <div
-        className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
+        className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-50`}
       />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <CardsSkeleton />
       </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         <TrackingChartSkeleton />
+        <LatestTasksSkeleton />
       </div>
     </>
   );
@@ -32,11 +33,11 @@ export function CardsSkeleton() {
 export function CardSkeleton() {
   return (
     <div
-      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-50 p-2 shadow-sm`}
     >
       <div className="flex p-4">
         <div className="h-5 w-5 rounded-md bg-gray-200" />
-        <div className="ml-2 h-6 w-16 rounded-md bg-gray-200 text-sm font-medium" />
+        <div className="ml-2 h-6 w-32 rounded-md bg-gray-200" />
       </div>
       <div className="flex items-center justify-center truncate rounded-xl bg-white px-4 py-8">
         <div className="h-7 w-20 rounded-md bg-gray-200" />
@@ -47,15 +48,52 @@ export function CardSkeleton() {
 
 export function TrackingChartSkeleton() {
   return (
-    <div className={`${shimmer} relative w-full overflow-hidden md:col-span-4`}>
-      <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
-      <div className="rounded-xl bg-gray-100 p-4">
-        <div className="sm:grid-cols-7 mt-0 grid h-[350px] grid-cols-7 items-end gap-2 rounded-md  bg-white p-4 md:gap-4" />
-        <div className="flex items-center pb-2 pt-6">
-          <div className="h-5 w-5 rounded-full bg-gray-200" />
-          <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
+    <div
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-50 shadow-sm`}
+    >
+      <div className="w-full">
+        {<div className="rounded-xl bg-gray-50 p-4">
+        <div className="flex p-4 pl-2 pt-2">
+          <div className="h-5 w-5 rounded-md bg-gray-200" />
+          <div className="ml-2 h-6 w-64 rounded-md bg-gray-200" />
+        </div>
+          <div className='bg-white h-[350px] p-6 pb-3 pl-0 rounded-xl w-full'></div>
+        </div>}
+      </div>
+    </div>
+  );
+}
+
+export function LatestTasksSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-50 shadow-sm`}
+    >
+      <div className="flex w-full flex-col">
+        <div className="flex grow flex-col rounded-xl bg-gray-50 p-4">
+          <div className="flex p-4 pl-2 pt-2">
+            <div className="h-5 w-5 rounded-md bg-gray-200" />
+            <div className="ml-2 h-6 w-32 rounded-md bg-gray-200" />
+          </div>
+          <div className="bg-white divide-y px-6">
+            <TaskSkeleton />
+            <TaskSkeleton />
+            <TaskSkeleton />
+            <TaskSkeleton />
+            <TaskSkeleton />
+            <TaskSkeleton />
+          </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+export function TaskSkeleton() {
+  return (
+    <div className={`flex flex-row items-center justify-between gap-4 py-4 text-sm`}>
+      <p className="h-5 w-1/2 bg-gray-200"></p>
+      <p className="h-5 w-1/4 bg-gray-200"></p>
     </div>
   );
 }

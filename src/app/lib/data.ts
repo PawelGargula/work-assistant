@@ -112,6 +112,30 @@ export async function fetchLatestTimeTracks() {
   }
 }
 
+export async function fetchLatestTasks() {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  try {
+    const tasks = await prisma.task.findMany({
+      where: {
+        userId: userId,
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      take: 6,
+    })
+
+    return tasks;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch latest Tasks.');
+  }
+}
+
 // Tasks
 export async function fetchFilteredTasks(
   query: string, 
