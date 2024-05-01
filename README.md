@@ -12,13 +12,15 @@ Increase efficiency and pleasure of your work.
 - Complete task :heavy_check_mark:
 - Continually check the status of tasks (Planned Completion Time vs Tracked Time) :heavy_check_mark:
 - Check all your "Time tracks" and edit it if you need to :heavy_check_mark:
+- Check general reports of your work on dashboard :heavy_check_mark:
+  - Number of created tasks :heavy_check_mark:
+  - Total tracked hours :heavy_check_mark:
+  - Tracked / Planed (%) of all completed tasks :heavy_check_mark:
+  - Time tracks by last 7 days :heavy_check_mark:
+  - Latest created Tasks :heavy_check_mark:
 - Create hierarchical Tasks
-- Check general reports of your work on dashboard
-  - Planned time vs. actual tasks completion time
-  - Most time-consuming tasks
-  - Average daily time spent on tasks
 - Export work status/reports
-- Pomodoro timer working on background, tells you when you should make a break, change position and so on
+- Pomodoro timer working on background, tells you when you should take a break, change position and so on
   - Configure interval
   - Configure break messages
 
