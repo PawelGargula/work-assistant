@@ -139,7 +139,8 @@ export async function fetchLatestTasks() {
 // Tasks
 export async function fetchFilteredTasks(
   query: string, 
-  currentPage: number
+  currentPage: number,
+  status: TaskStatus | undefined,
 ) {
   noStore();
 
@@ -155,7 +156,8 @@ export async function fetchFilteredTasks(
         title: {
           contains: query,
           mode: 'insensitive'
-        }
+        },
+        status: status
       },
       orderBy: {
         createdAt: 'desc'
@@ -171,7 +173,7 @@ export async function fetchFilteredTasks(
   }
 }
 
-export async function fetchTasksPages(query: string) {
+export async function fetchTasksPages(query: string, status: TaskStatus | undefined) {
   noStore();
 
   const session = await auth();
@@ -184,7 +186,8 @@ export async function fetchTasksPages(query: string) {
         title: {
           contains: query,
           mode: 'insensitive'
-        }
+        },
+        status: status
       }
     });
 

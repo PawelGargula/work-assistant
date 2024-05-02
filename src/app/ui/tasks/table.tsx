@@ -6,11 +6,13 @@ import { TaskStatus } from '@prisma/client';
 export default async function TasksTable({
   query,
   currentPage,
+  status,
 }: {
   query: string;
   currentPage: number;
+  status: TaskStatus | undefined;
 }) {
-  const tasks = await fetchFilteredTasks(query, currentPage);
+  const tasks = await fetchFilteredTasks(query, currentPage, status);
   return (
     <div className="w-full">
       <div className="mt-6 flow-root">
