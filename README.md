@@ -28,3 +28,4 @@ Increase efficiency and pleasure of your work.
 
 ![Home](screenshots/opengraph-image.png)
 ![Dashboard](screenshots/work-assistant-dashboard.png)
+![Create Task](screenshots/create-task.png)
