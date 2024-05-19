@@ -28,6 +28,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
           direction="left"
           href={createPageURL(currentPage - 1)}
           isDisabled={currentPage <= 1}
+          label='Go to the previous page'
         />
 
         <div className="flex -space-x-px">
@@ -46,6 +47,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
                 page={page}
                 position={position}
                 isActive={currentPage === page}
+                label={`Go to the page ${page}`}
               />
             );
           })}
@@ -55,6 +57,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
           direction="right"
           href={createPageURL(currentPage + 1)}
           isDisabled={currentPage >= totalPages}
+          label='Go to the next page'
         />
       </div>
     </>
@@ -66,11 +69,13 @@ function PaginationNumber({
   href,
   isActive,
   position,
+  label
 }: {
   page: number | string;
   href: string;
   position?: 'first' | 'last' | 'middle' | 'single';
   isActive: boolean;
+  label: string;
 }) {
   const className = clsx(
     'flex focus-visible:outline-violet-500 h-10 w-10 items-center justify-center text-sm border',
@@ -86,7 +91,7 @@ function PaginationNumber({
   return isActive || position === 'middle' ? (
     <div className={className}>{page}</div>
   ) : (
-    <Link href={href} className={className}>
+    <Link href={href} className={className} aria-label={label} title={label}>
       {page}
     </Link>
   );
@@ -96,10 +101,12 @@ function PaginationArrow({
   href,
   direction,
   isDisabled,
+  label
 }: {
   href: string;
   direction: 'left' | 'right';
   isDisabled?: boolean;
+  label: string;
 }) {
   const className = clsx(
     'flex focus-visible:outline-violet-500 h-10 w-10 items-center justify-center rounded-md border',
@@ -121,7 +128,7 @@ function PaginationArrow({
   return isDisabled ? (
     <div className={className}>{icon}</div>
   ) : (
-    <Link className={className} href={href}>
+    <Link className={className} href={href} aria-label={label} title={label}>
       {icon}
     </Link>
   );
