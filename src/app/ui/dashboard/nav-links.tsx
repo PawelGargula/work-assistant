@@ -4,6 +4,7 @@ import {
   HomeIcon,
   ClipboardDocumentListIcon,
   ClockIcon,
+  UserCircleIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -22,6 +23,11 @@ const links = [
     name: 'Time tracks',
     href: '/dashboard/time-tracks',
     icon: ClockIcon,
+  },
+  {
+    name: 'Account',
+    href: '/dashboard/account',
+    icon: UserCircleIcon,
   }
 ];
 

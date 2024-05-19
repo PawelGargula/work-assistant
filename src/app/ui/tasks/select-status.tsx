@@ -22,7 +22,7 @@ export default function SelectStatus() {
         <>
             <select 
                 aria-label="Filter by Status" 
-                className="border border-gray-200 focus-visible:outline-violet-500 p-[9px] rounded-md text-sm"
+                className="border border-gray-200 focus-visible:outline-violet-500 p-1 rounded-md text-sm"
                 defaultValue={searchParams.get("status")?.toString()}
                 id="status-select" 
                 name="status" 
