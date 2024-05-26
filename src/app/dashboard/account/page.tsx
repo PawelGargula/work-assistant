@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import EmailPreview from '@/src/app/ui/account/email-preview';
+import DeleteAccout from '@/src/app/ui/account/delete-account';
 
 export const metadata: Metadata = {
     title: 'Account',
@@ -18,6 +19,7 @@ export default async function Page() {
             Account
         </h1>
         <EmailPreview email={session?.user?.email}/>
+        <DeleteAccout email={session?.user?.email}/>
     </main>
     );
 }

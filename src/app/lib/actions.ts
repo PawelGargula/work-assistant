@@ -25,7 +25,6 @@ export async function authenticate(
 }
 
 // Tasks
-
 const CreateTaskFormSchema = z.object({
   id: z.string().cuid(),
   title: z
@@ -497,4 +496,33 @@ export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackStat
   // Revalidate the cache for the tasks page and redirect the tasks.
   revalidatePath('/dashboard/time-tracks');
   redirect('/dashboard/time-tracks');
+}
+
+// User
+export async function deleteUser() {
+  const session = await auth();
+  const sessionUserId = session?.user?.id;
+  const isLoggedIn = !!sessionUserId;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  try {
+    await prisma.user.delete({
+      where: {
+        id: sessionUserId
+      }
+    });
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Delete User.',
+    };
+  }
+
+  // Redirect to Sign in Page
+  redirect('/');
 }

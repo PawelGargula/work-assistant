@@ -18,6 +18,7 @@ Increase efficiency and pleasure of your work.
   - Tracked / Planed (%) of all completed tasks :heavy_check_mark:
   - Time tracks by last 7 days :heavy_check_mark:
   - Latest created Tasks :heavy_check_mark:
+- Delete your account with all associated data (Tasks, Time tracks)
 - Create hierarchical Tasks
 - Export work status/reports
 - Pomodoro timer working on background, tells you when you should take a break, change position and so on
@@ -29,3 +30,4 @@ Increase efficiency and pleasure of your work.
 ![Home](screenshots/opengraph-image.png)
 ![Dashboard](screenshots/work-assistant-dashboard.png)
 ![Create Task](screenshots/create-task.png)
+![Delete Account](screenshots/delete-account-desktop.png)
