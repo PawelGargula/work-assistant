@@ -28,6 +28,11 @@ Increase efficiency and pleasure of your work.
 ## Screenshot
 
 ![Home](screenshots/opengraph-image.png)
-![Dashboard](screenshots/work-assistant-dashboard.png)
-![Create Task](screenshots/create-task.png)
-![Delete Account](screenshots/delete-account-desktop.png)
+![Dashboard](screenshots/dashboard.png)
+![Tasks](screenshots/tasks.png)
+![Task](screenshots/task.png)
+![Task Time tracks](screenshots/task-time-tracks.png)
+![Time tracks](screenshots/time-tracks.png)
+![Account](screenshots/account.png)
+![Task (mobile)](screenshots/task-mobile.png)
+![Task Time tracks (mobile)](screenshots/task-time-tracks-mobile.png)
