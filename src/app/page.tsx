@@ -1,7 +1,7 @@
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation'
 import SignInForm from "@/src/app/ui/sign-in/sign-in-form";
-import WorkAssistantLogo from "./ui/work-assistant-logo";
+import WorkAssistantLogo from "@/src/app/ui/work-assistant-logo";
 import Image from 'next/image';
 
 export default async function Home() {
