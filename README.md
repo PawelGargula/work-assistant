@@ -7,6 +7,8 @@ Increase efficiency and pleasure of your work.
 ## How it works
 
 Done
+
+- Terms of Service and Privacy Policy :heavy_check_mark:
 - Sign in by email (authentication link) :heavy_check_mark:
 - Create/Edit tasks with planned completion time :heavy_check_mark:
 - Start/stop tracking time of current task :heavy_check_mark:
@@ -22,6 +24,7 @@ Done
 - Delete your account with all associated data (Tasks, Time tracks) :heavy_check_mark:
 
 Planned
+
 - Create hierarchical Tasks
 - Export work status/reports
 - Pomodoro timer working on background, tells you when you should take a break, change position and so on
@@ -40,3 +43,4 @@ Planned
 ![Account](screenshots/account.png)
 ![Task (mobile)](screenshots/task-mobile.png)
 ![Task Time tracks (mobile)](screenshots/task-time-tracks-mobile.png)
+![Terms of Service and Privacy Policy](screenshots/terms-of-service.png)
