@@ -449,10 +449,10 @@ export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackStat
     const timeTrackOccupied = await prisma.timeTrack.findFirst({
       where: {
         OR: [
-          { id: { not: id }, startTime: { lte: startTime }, endTime: { gte: startTime } }, // Start time inside other
-          { id: { not: id }, startTime: { lte: endTime }, endTime: { gte: endTime } }, // End time inside other
-          { id: { not: id }, startTime: { gte: startTime , lte: endTime} }, // Other Start time between saving Start and End
-          { id: { not: id }, startTime: { lte: endTime }, endTime: null } // Saving End time after active (curently tracking) Time track Start
+          { id: { not: id }, startTime: { lte: startTime }, endTime: { gte: startTime }, task: { userId: sessionUserId } }, // Start time inside other
+          { id: { not: id }, startTime: { lte: endTime }, endTime: { gte: endTime }, task: { userId: sessionUserId } }, // End time inside other
+          { id: { not: id }, startTime: { gte: startTime , lte: endTime}, task: { userId: sessionUserId } }, // Other Start time between saving Start and End
+          { id: { not: id }, startTime: { lte: endTime }, endTime: null, task: { userId: sessionUserId } } // Saving End time after active (curently tracking) Time track Start
         ],
       },
       include: {
