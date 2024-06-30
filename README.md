@@ -21,15 +21,16 @@ Done
   - Tracked / Planed (%) of all completed tasks :heavy_check_mark:
   - Time tracks by last 7 days :heavy_check_mark:
   - Latest created Tasks :heavy_check_mark:
+- Pomodoro timer working on background, tells when you should take a break :heavy_check_mark:
+  - Appears on side menu and page title :heavy_check_mark:
+  - You can reset timer in any time :heavy_check_mark:
+  - After time end you will be notified by short alarm and information "Break time" :heavy_check_mark:
 - Delete your account with all associated data (Tasks, Time tracks) :heavy_check_mark:
 
 Planned
 
 - Create hierarchical Tasks
 - Export work status/reports
-- Pomodoro timer working on background, tells you when you should take a break, change position and so on
-  - Configure interval
-  - Configure break messages
 - Ask AI
 
 ## Screenshot
