@@ -1,6 +1,6 @@
 'use server'
 
-import { auth, signIn } from '@/auth';
+import { auth, signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -509,6 +509,8 @@ export async function deleteUser() {
       message: 'You are not logged in.',
     };
   }
+
+  await signOut();
 
   try {
     await prisma.user.delete({
