@@ -510,8 +510,6 @@ export async function deleteUser() {
     };
   }
 
-  await signOut();
-
   try {
     await prisma.user.delete({
       where: {
@@ -524,6 +522,8 @@ export async function deleteUser() {
       message: 'Database Error: Failed to Delete User.',
     };
   }
+
+  await signOut();
 
   // Redirect to Sign in Page
   redirect('/');
