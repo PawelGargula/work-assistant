@@ -223,17 +223,23 @@ export async function fetchTaskById(id: string) {
 export async function fetchTimeTracksByTaskId(id: string) {
   noStore();
   
+  const session = await auth();
+  const userId = session?.user?.id;
+
   try {
-    const tasks = prisma.timeTrack.findMany({
+    const timeTracks = prisma.timeTrack.findMany({
       where: {
-          taskId: id
+          taskId: id,
+          task: {
+            userId: userId,
+          }
       },
       orderBy: {
         startTime: 'desc'
       }
     });
 
-    return tasks;
+    return timeTracks;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch Time Tracks by Task id.');
