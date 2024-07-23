@@ -42,6 +42,7 @@ Planned
 ![Task Time tracks](screenshots/task-time-tracks.png)
 ![Time tracks](screenshots/time-tracks.png)
 ![Account](screenshots/account.png)
+![Terms of Service and Privacy Policy page](screenshots/terms-of-service-page.png)
+![Terms of Service and Privacy Policy](screenshots/terms-of-service.png)
 ![Task (mobile)](screenshots/task-mobile.png)
 ![Task Time tracks (mobile)](screenshots/task-time-tracks-mobile.png)
-![Terms of Service and Privacy Policy](screenshots/terms-of-service.png)
