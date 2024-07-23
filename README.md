@@ -1,4 +1,4 @@
-# Work assistant (in progress)
+# Work assistant
 
 Increase efficiency and pleasure of your work.
 
