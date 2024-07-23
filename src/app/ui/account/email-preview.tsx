@@ -24,7 +24,7 @@ export default function EmailPreview({ email } : { email: string | null | undefi
 
     return (
         <div className="flex gap-2 items-center overflow-auto">
-            <button aria-label={label} className="border focus-visible:outline-violet-500 hover:text-violet-700 p-2 rounded-md" onClick={toggleMask} title={label} type="button">
+            <button aria-label={label} className="border bg-white focus-visible:outline-violet-500 hover:text-violet-700 p-2 rounded-md" onClick={toggleMask} title={label} type="button">
                 { isMasked ? <EyeIcon className="w-5"/> : <EyeSlashIcon className="w-5"/> }
             </button>
             <span className="font-medium">Email:</span>

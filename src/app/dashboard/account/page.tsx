@@ -18,8 +18,10 @@ export default async function Page() {
         <h1 className="mb-4 text-xl md:text-2xl md:mb-8">
             Account
         </h1>
-        <EmailPreview email={session?.user?.email}/>
-        <DeleteAccout email={session?.user?.email}/>
+        <div className="bg-gray-50 md:p-6 p-4 rounded-md">
+            <EmailPreview email={session?.user?.email}/>
+            <DeleteAccout email={session?.user?.email}/>
+        </div>
     </main>
     );
 }

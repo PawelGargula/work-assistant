@@ -4,7 +4,8 @@ import {
   HomeIcon,
   ClipboardDocumentListIcon,
   ClockIcon,
-  UserCircleIcon
+  UserCircleIcon,
+  ShieldCheckIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -25,7 +26,12 @@ const links = [
     name: 'Account',
     href: '/dashboard/account',
     icon: UserCircleIcon,
-  }
+  },
+  {
+    name: 'Terms of Service',
+    href: '/dashboard/terms-of-service',
+    icon: ShieldCheckIcon,
+  },
 ];
 
 export default function NavLinks() {
