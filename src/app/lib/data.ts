@@ -123,9 +123,17 @@ export async function fetchLatestTasks() {
       where: {
         userId: userId,
       },
-      orderBy: {
-        createdAt: 'desc'
-      },
+      orderBy: [
+        {
+          status: 'asc',
+        },
+        {
+          updatedAt: { sort: 'desc', nulls: 'last'},
+        },
+        {
+          createdAt: 'desc'
+        }
+      ],
       take: 6,
     })
 
@@ -159,9 +167,17 @@ export async function fetchFilteredTasks(
         },
         status: status
       },
-      orderBy: {
-        createdAt: 'desc'
-      },
+      orderBy: [
+        {
+          status: 'asc',
+        },
+        {
+          updatedAt: { sort: 'desc', nulls: 'last'},
+        },
+        {
+          createdAt: 'desc'
+        }
+      ],
       skip: skip,
       take: ITEMS_PER_PAGE,
     })

@@ -62,6 +62,7 @@ model Task {
     User                  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId                String
     createdAt             DateTime    @default(now())
+    updatedAt             DateTime?   @updatedAt
     plannedCompletionTime Int // In minutes
     parent                Task?       @relation("ParentTask", fields: [parentId], references: [id])
     parentId              String?
@@ -70,8 +71,8 @@ model Task {
 }
 
 enum TaskStatus {
-    NOTTRACKING
     TRACKING
+    NOTTRACKING
     COMPLETED
 }
 

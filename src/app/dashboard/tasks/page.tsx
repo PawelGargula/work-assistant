@@ -10,6 +10,7 @@ import { TasksTableSkeleton } from '@/src/app/ui/skeletons';
 import Pagination from '@/src/app/ui/tasks/pagination';
 import SelectStatus from '@/src/app/ui/tasks/select-status';
 import { TaskStatus } from '@prisma/client';
+import AboutSorting from '@/src/app/ui/tasks/about-sorting';
 
 export const metadata: Metadata = {
     title: 'Tasks',
@@ -38,7 +39,10 @@ export default async function Page({
         <div className="w-full">
         <div className="flex w-full items-center justify-between">
             <h1 className='text-xl md:text-2xl'>Tasks</h1>
-            <SelectStatus />
+            <div className='flex gap-2 items-center'>
+                <AboutSorting />
+                <SelectStatus />
+            </div>
         </div>
         <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
             <Search placeholder="Search tasks..." />
