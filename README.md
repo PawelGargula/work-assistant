@@ -25,6 +25,7 @@ Done
   - Appears on side menu and page title :heavy_check_mark:
   - You can reset timer in any time :heavy_check_mark:
   - After time end you will be notified by short alarm and information "Break time" :heavy_check_mark:
+  - You can set the timer to any duration between 1 and 99 minutes (the default is 25 minutes)
 - Delete your account with all associated data (Tasks, Time tracks) :heavy_check_mark:
 
 Planned
@@ -44,5 +45,6 @@ Planned
 ![Account](screenshots/account.png)
 ![Terms of Service and Privacy Policy page](screenshots/terms-of-service-page.png)
 ![Terms of Service and Privacy Policy](screenshots/terms-of-service.png)
+![Set Timer minutes](screenshots/set-timer-minutes.png)
 ![Task (mobile)](screenshots/task-mobile.png)
 ![Task Time tracks (mobile)](screenshots/task-time-tracks-mobile.png)
