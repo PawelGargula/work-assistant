@@ -25,7 +25,7 @@ Done
   - Appears on side menu and page title :heavy_check_mark:
   - You can reset timer in any time :heavy_check_mark:
   - After time end you will be notified by short alarm and information "Break time" :heavy_check_mark:
-  - You can set the timer to any duration between 1 and 99 minutes (the default is 25 minutes)
+  - You can set the timer to any duration between 1 and 99 minutes (the default is 25 minutes) :heavy_check_mark:
 - Delete your account with all associated data (Tasks, Time tracks) :heavy_check_mark:
 
 Planned
