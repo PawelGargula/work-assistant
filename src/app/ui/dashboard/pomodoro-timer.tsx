@@ -26,6 +26,8 @@ export default function PomodoroTimer() {
     };
     
     useEffect(() => {
+        //sound from https://freesound.org/s/22627/
+        const alarm = new Audio("/alarm.flac");
         const intervalId = setInterval(() => {
             const timeToEnd = getTimeToEnd();
 
@@ -37,8 +39,6 @@ export default function PomodoroTimer() {
 
             if (timeToEnd < 0 && isCounting) {
                 setIsCounting(false);
-                //sound from https://freesound.org/s/22627/
-                const alarm = new Audio("/alarm.flac");
                 alarm.play();
                 let counter = 1;
                 alarm.onended = () => {
