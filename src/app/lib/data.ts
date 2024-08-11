@@ -134,7 +134,7 @@ export async function fetchLatestTasks() {
           createdAt: 'desc'
         }
       ],
-      take: 6,
+      take: 7,
     })
 
     return tasks;

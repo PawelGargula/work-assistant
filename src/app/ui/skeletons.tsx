@@ -52,13 +52,17 @@ export function TrackingChartSkeleton() {
       className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-50 shadow-sm`}
     >
       <div className="w-full">
-        {<div className="rounded-xl bg-gray-50 p-4">
-        <div className="flex p-4 pl-2 pt-2">
-          <div className="h-5 w-5 rounded-md bg-gray-200" />
-          <div className="ml-2 h-6 w-64 rounded-md bg-gray-200" />
-        </div>
+        <div className="rounded-xl bg-gray-50 p-4">
+          <div className="flex p-4 pl-2 pt-2">
+            <div className="h-5 w-5 rounded-md bg-gray-200" />
+            <div className="ml-2 h-6 w-64 rounded-md bg-gray-200" />
+          </div>
           <div className='bg-white h-[350px] p-6 pb-3 pl-0 rounded-xl w-full'></div>
-        </div>}
+          <div className="bg-white flex mt-1 px-8 py-3 rounded-b-xl">
+            <div className="h-6 w-32 rounded-md bg-gray-200" />
+            <div className="h-6 ml-auto w-32 rounded-md bg-gray-200" />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -76,6 +80,7 @@ export function LatestTasksSkeleton() {
             <div className="ml-2 h-6 w-32 rounded-md bg-gray-200" />
           </div>
           <div className="bg-white divide-y px-6">
+            <TaskSkeleton />
             <TaskSkeleton />
             <TaskSkeleton />
             <TaskSkeleton />

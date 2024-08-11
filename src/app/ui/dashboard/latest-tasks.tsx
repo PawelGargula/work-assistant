@@ -12,7 +12,11 @@ export default async function LatestTasks() {
             <ClipboardDocumentCheckIcon className="h-5 w-5 text-gray-700" />
             <h3 className="ml-2 text-sm font-medium">Latest Tasks</h3>
         </div>
-        <div className="bg-white divide-y px-6">
+        {latestTasks.length < 1 
+          ? (<div className="bg-white flex h-full items-center justify-center">
+            <span>No tasks</span>
+          </div>)
+          : <div className="bg-white divide-y px-6">
           {latestTasks.map((task, i) => {
             return (
               <div
@@ -34,7 +38,7 @@ export default async function LatestTasks() {
               </div>
             );
           })}
-        </div>
+        </div> }
       </div>
     </div>
   );
