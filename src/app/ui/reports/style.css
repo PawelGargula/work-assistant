@@ -1,0 +1,36 @@
+/* Overwrite React Suite primary color */
+:root {
+    --rs-primary-50: #f5f3ff;
+    --rs-primary-100: #ede9fe;
+    --rs-primary-200: #ddd6fe;
+    --rs-primary-300: #c4b5fd;
+    --rs-primary-400: #a78bfa;
+    --rs-primary-500: #8b5cf6;
+    --rs-primary-600: #7c3aed;
+    --rs-primary-700: #6d28d9;
+    --rs-primary-800: #5b21b6;
+    --rs-primary-900: #4c1d95;
+}
+
+/* React Suite Licence.
+The MIT License (MIT)
+
+Copyright (c) 2016-present React Suite Team.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
