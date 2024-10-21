@@ -1,3 +1,5 @@
+"use client";
+
 import { TimeTrack } from "@prisma/client";
 import { formatTimeDuration, getTimeDuration, getTimeTracksByDateRange } from "@/src/app/lib/utils";
 
