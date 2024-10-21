@@ -29,8 +29,6 @@ export default async function ReportsPage({
   const category = searchParams?.category;
   const timeTracks = await fetchTimeTracksByDateRange(from, to);
 
-  console.log(timeTracks);
-
   return (
     <main>
         <h1 className="mb-4 text-xl md:text-2xl md:mb-8">
