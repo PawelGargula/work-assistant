@@ -1,3 +1,5 @@
+import { TimeTrack } from "@prisma/client";
+
 export const formatDateToLocal = (date: Date | null) => {
     return date ?
         new Date(date).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })
@@ -61,3 +63,37 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
       totalPages,
     ];
   };
+
+export const getTimeTracksByDateRange = (timeTracks: TimeTrack[], from: Date, to: Date) => {
+  const timeTracksByDay: {day: string, duration: number}[] = [];
+  const currentDate = new Date(from);
+  const endDate = new Date(to);
+
+  while (currentDate <= endDate) {
+    timeTracksByDay.push({
+      day: new Date(currentDate).toLocaleDateString(),
+      duration: 0,
+    });
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  timeTracks.forEach(({startTime, endTime}) => {
+    if (startTime.toLocaleDateString() === endTime?.toLocaleDateString() 
+      || (endTime === null && startTime.toLocaleDateString() === new Date().toLocaleDateString())) {
+        const timeTrackByDay = timeTracksByDay.find(timeTrackByDay => timeTrackByDay.day === startTime.toLocaleDateString());
+        timeTrackByDay && (timeTrackByDay!.duration += getTimeDuration(startTime, endTime));    
+    } else {
+      let currentDay = new Date(startTime);
+      !endTime && (endTime = new Date());
+      while(currentDay < endTime) {
+        const nextDayStart = new Date(currentDay).setHours(0,0,0,0) + (24 * 60 * 60 * 1000);
+        const endOfCurrentDay = new Date(Math.min(nextDayStart, Number(new Date(endTime))));
+        const timeTrackByDay = timeTracksByDay.find(timeTrackByDay => timeTrackByDay.day === currentDay.toLocaleDateString());
+        timeTrackByDay && (timeTrackByDay!.duration += getTimeDuration(currentDay, endOfCurrentDay));
+        currentDay = endOfCurrentDay;
+      }
+    }
+  });
+
+  return timeTracksByDay;
+};
