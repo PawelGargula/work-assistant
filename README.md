@@ -4,6 +4,19 @@ Increase efficiency and pleasure of your work.
 
 ## [Demo](https://work-assistant-puce.vercel.app/)
 
+## Technologies Used
+
+This project is built with the following technologies:
+
+- [Next.js](https://nextjs.org/) - React framework for production
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [Auth.js](https://authjs.dev/) - Authentication for Next.js
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript
+- [PostgreSQL](https://www.postgresql.org/) - Open source relational database
+- [Vercel](https://vercel.com/) - Platform for deploying and hosting Next.js apps
+
 ## How it works
 
 Done
