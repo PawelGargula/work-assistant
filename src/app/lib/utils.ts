@@ -65,7 +65,7 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   };
 
 export const getTimeTracksByDateRange = (timeTracks: TimeTrack[], from: Date, to: Date) => {
-  const timeTracksByDay: {day: string, duration: number}[] = [];
+  const timeTracksByDay: {day: string, duration: number, date: Date}[] = [];
   const currentDate = new Date(from);
   const endDate = new Date(to);
 
@@ -73,6 +73,7 @@ export const getTimeTracksByDateRange = (timeTracks: TimeTrack[], from: Date, to
     timeTracksByDay.push({
       day: new Date(currentDate).toLocaleDateString(),
       duration: 0,
+      date: new Date(currentDate)
     });
     currentDate.setDate(currentDate.getDate() + 1);
   }

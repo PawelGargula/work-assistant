@@ -4,6 +4,7 @@ import 'rsuite/dist/rsuite-no-reset.min.css';
 import '@/src/app/ui/reports/rs-primary-color.css';
 import { DateRangePicker } from 'rsuite';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { ReportCategory } from '@/src/app/ui/reports/report-category';
 
 export default function ReportPeriodPicker() {
     const pathname = usePathname();
@@ -25,6 +26,8 @@ export default function ReportPeriodPicker() {
         replace(`${pathname}?${params.toString()}`);
     };
 
+    const category = searchParams.get('category');
+
     return (
         <>
             <DateRangePicker 
@@ -39,6 +42,8 @@ export default function ReportPeriodPicker() {
                 placeholder="Select period" 
                 onChange={(value) => createPageURL(value)}
                 format="dd.MM.yyyy"
+                hoverRange={category === ReportCategory.WEEK ? "week" : category === ReportCategory.MONTH ? "month" : undefined} 
+                isoWeek
             />
         </>
     );
