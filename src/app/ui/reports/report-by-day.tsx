@@ -47,7 +47,7 @@ export default function ReportByDay({ timeTracks, from, to }: { timeTracks: Time
                     </table>
                 </div> 
                 <div className="bg-white flex mt-1 px-6 py-3 rounded-b-lg text-sm">
-                    <span className="font-medium">Avarage:</span><span className='ml-1'>{formatTimeDuration(avaragePerDay)}</span>
+                    <span className="font-medium">Day Avarage:</span><span className='ml-1'>{formatTimeDuration(avaragePerDay)}</span>
                     <span className="font-medium ml-auto">Total:</span><span className='ml-1'>{formatTimeDuration(sumOfAllDays)}</span>
                 </div>
             </>
