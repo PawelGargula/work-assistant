@@ -21,10 +21,10 @@ export default function ReportByDay({ timeTracks, from, to }: { timeTracks: Time
                     <table className="min-w-full text-gray-900 md:table">
                         <thead className="bg-gray-50 font-normal rounded-t-lg shadow sticky text-left text-sm top-0">
                         <tr>
-                            <th scope="col" className="px-4 py-1 font-medium sm:pl-6">
+                            <th scope="col" className="px-4 pb-2 font-medium sm:pl-6">
                                 Day
                             </th>
-                            <th scope="col" className="px-3 py-1 font-medium">
+                            <th scope="col" className="px-3 pb-2 font-medium">
                                 Tracked Time
                             </th>
                         </tr>
@@ -46,7 +46,7 @@ export default function ReportByDay({ timeTracks, from, to }: { timeTracks: Time
                         </tbody>
                     </table>
                 </div> 
-                <div className="bg-white flex mt-1 px-8 py-3 rounded-b-lg text-sm">
+                <div className="bg-white flex mt-1 px-6 py-3 rounded-b-lg text-sm">
                     <span className="font-medium">Avarage:</span><span className='ml-1'>{formatTimeDuration(avaragePerDay)}</span>
                     <span className="font-medium ml-auto">Total:</span><span className='ml-1'>{formatTimeDuration(sumOfAllDays)}</span>
                 </div>

@@ -1,7 +1,7 @@
 import CardWrapper from '@/src/app/ui/dashboard/cards';
 import TrackingChart from '@/src/app/ui/dashboard/tracking-chart';
 import { Suspense } from 'react';
-import DashboardSkeleton, { CardsSkeleton, TrackingChartSkeleton, LatestTasksSkeleton } from '@/src/app/ui/skeletons';
+import { CardsSkeleton, TrackingChartSkeleton, LatestTasksSkeleton } from '@/src/app/ui/skeletons';
 import { Metadata } from 'next';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';

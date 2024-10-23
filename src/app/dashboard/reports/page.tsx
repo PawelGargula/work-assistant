@@ -6,6 +6,8 @@ import ReportPeriodPicker from '@/src/app/ui/reports/report-period-picker';
 import { fetchTimeTracksByDateRange } from '@/src/app/lib/data';
 import { ReportCategory } from '@/src/app/ui/reports/report-category';
 import ReportByDay from '@/src/app/ui/reports/report-by-day';
+import { Suspense } from 'react';
+import { ReportTableSkeleton } from '@/src/app/ui/skeletons';
 
 export const metadata: Metadata = {
   title: 'Reports',
@@ -40,9 +42,13 @@ export default async function ReportsPage({
           <ReportPeriodPicker />
         </div>
 
-        <div className="bg-gray-50 md:p-6 p-4 rounded-md">
-          {category === ReportCategory.DAY && (<ReportByDay timeTracks={timeTracks} from={from} to={to} />)}
-        </div>
+        {category && to && from && <div className="bg-gray-50 md:p-6 p-4 rounded-md">
+          {category === ReportCategory.DAY && (
+            <Suspense fallback={<ReportTableSkeleton />}>
+              <ReportByDay timeTracks={timeTracks} from={from} to={to} />
+            </Suspense>
+          )}
+        </div>}
     </main>
   )
 }
