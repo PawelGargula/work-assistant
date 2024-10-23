@@ -7,6 +7,7 @@ import { fetchTimeTracksByDateRange } from '@/src/app/lib/data';
 import { ReportCategory } from '@/src/app/ui/reports/report-category';
 import ReportByDay from '@/src/app/ui/reports/report-by-day';
 import ReportByWeek from '@/src/app/ui/reports/report-by-week';
+import ReportByMonth from '@/src/app/ui/reports/report-by-month';
 import { Suspense } from 'react';
 import { ReportTableSkeleton } from '@/src/app/ui/skeletons';
 
@@ -49,9 +50,16 @@ export default async function ReportsPage({
               <ReportByDay timeTracks={timeTracks} from={from} to={to} />
             </Suspense>
           )}
+
           {category === ReportCategory.WEEK && (
             <Suspense fallback={<ReportTableSkeleton />}>
               <ReportByWeek timeTracks={timeTracks} from={from} to={to} />
+            </Suspense>
+          )}
+          
+          {category === ReportCategory.MONTH && (
+            <Suspense fallback={<ReportTableSkeleton />}>
+              <ReportByMonth timeTracks={timeTracks} from={from} to={to} />
             </Suspense>
           )}
         </div>}
