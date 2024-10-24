@@ -108,6 +108,12 @@ export const getTasksTimeTracksByDateRange = (
   from: Date, 
   to: Date
 ) => {
+  // Add one day to include the entire day
+  if (to) {
+    const toDate = new Date(to);
+    to = new Date(toDate.setDate(toDate.getDate() + 1));
+  }
+
   const tasksTimeTracks = Array.from(new Set(timeTracks.map(timeTrack => timeTrack.taskId)))
     .map(taskId => {
       const task = timeTracks.find(timeTrack => timeTrack.taskId === taskId)?.task;
