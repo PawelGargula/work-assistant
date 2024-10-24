@@ -8,6 +8,7 @@ import { ReportCategory } from '@/src/app/ui/reports/report-category';
 import ReportByDay from '@/src/app/ui/reports/report-by-day';
 import ReportByWeek from '@/src/app/ui/reports/report-by-week';
 import ReportByMonth from '@/src/app/ui/reports/report-by-month';
+import ReportByTask from '@/src/app/ui/reports/report-by-task';
 import { Suspense } from 'react';
 import { ReportTableSkeleton } from '@/src/app/ui/skeletons';
 
@@ -60,6 +61,12 @@ export default async function ReportsPage({
           {category === ReportCategory.MONTH && (
             <Suspense fallback={<ReportTableSkeleton />}>
               <ReportByMonth timeTracks={timeTracks} from={from} to={to} />
+            </Suspense>
+          )}
+
+          {category === ReportCategory.TASK && (
+            <Suspense fallback={<ReportTableSkeleton />}>
+              <ReportByTask timeTracks={timeTracks} from={from} to={to} />
             </Suspense>
           )}
         </div>}

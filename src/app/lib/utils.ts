@@ -98,3 +98,46 @@ export const getTimeTracksByDateRange = (timeTracks: TimeTrack[], from: Date, to
 
   return timeTracksByDay;
 };
+
+export const getTasksTimeTracksByDateRange = (
+  timeTracks: ({
+    task: {
+      title: string;
+    };
+  } & TimeTrack)[],
+  from: Date, 
+  to: Date
+) => {
+  const tasksTimeTracks = Array.from(new Set(timeTracks.map(timeTrack => timeTrack.taskId)))
+    .map(taskId => {
+      const task = timeTracks.find(timeTrack => timeTrack.taskId === taskId)?.task;
+      return {
+        taskId: taskId,
+        taskTitle: task?.title || '',
+        duration: 0
+      };
+    });
+
+  timeTracks.forEach(timeTrack => {
+    if (timeTrack.startTime < from) {
+      timeTrack.startTime = from;
+    }
+
+    if (timeTrack.endTime === null) {
+      timeTrack.endTime = new Date();
+    }
+
+    if (timeTrack.endTime > to) {
+      timeTrack.endTime = to;
+    }
+    
+    const task = tasksTimeTracks.find(task => task.taskId === timeTrack.taskId);
+    if (task) {
+      task.duration += getTimeDuration(timeTrack.startTime, timeTrack.endTime);
+    }
+  });
+
+  tasksTimeTracks.sort((a, b) => b.duration - a.duration);
+  
+  return tasksTimeTracks;
+};

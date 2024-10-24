@@ -383,13 +383,17 @@ export async function fetchTimeTracksByDateRange(from: string | undefined, to: s
           userId: userId,
         },
         OR: [
-          { startTime: { gte: from, lte: to} }, // StartTime inside range
-          { endTime: { gte: from, lte: to } } // EndTime inside range
+          { startTime: { gte: from, lt: to} }, // StartTime inside range
+          { endTime: { gte: from, lt: to } } // EndTime inside range
         ],
       },
-      orderBy: {
-        startTime: 'desc'
-      }
+      include: {
+        task: {
+          select: {
+            title: true,
+          }
+        }
+      },
     });
 
     return timeTracks;
