@@ -362,3 +362,43 @@ export async function fetchTimeTrackById(id: string) {
     throw new Error('Failed to fetch Time track.');
   }
 }
+
+// Reports
+export async function fetchTimeTracksByDateRange(from: string | undefined, to: string | undefined) {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  // Add one day to include the entire day
+  if (to) {
+    const toDate = new Date(to);
+    to = new Date(toDate.setDate(toDate.getDate() + 1)).toISOString();
+  }
+
+  try {
+    const timeTracks = await prisma.timeTrack.findMany({
+      where: {
+        task: {
+          userId: userId,
+        },
+        OR: [
+          { startTime: { gte: from, lt: to} }, // StartTime inside range
+          { endTime: { gte: from, lt: to } } // EndTime inside range
+        ],
+      },
+      include: {
+        task: {
+          select: {
+            title: true,
+          }
+        }
+      },
+    });
+
+    return timeTracks;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch Time tracks by date range.');
+  }
+}

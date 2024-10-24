@@ -229,3 +229,73 @@ export function TimeTrackTableRowSkeleton() {
       </tr>
   );
 }
+
+// Reports
+export function ReportsSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-50 md:mb-8`}
+      />
+      <div className='flex gap-3 flex-wrap mb-4 md:mb-6'>
+        <div className={`${shimmer} bg-gray-100 flex items-center h-[39px] overflow-hidden relative w-[157px] rounded`}>
+          <div className="bg-white h-[7px] ml-auto mr-3 w-[14px]"></div>
+        </div>
+        <div className={`${shimmer} bg-gray-100 flex items-center h-[39px] overflow-hidden relative w-[255px] rounded`}>
+          <div className="bg-white h-[14px] ml-auto mr-3 w-[14px]"></div>
+        </div>
+      </div>
+      <div className="bg-gray-50 md:p-6 p-4 rounded-md">
+        <ReportTableSkeleton />
+      </div>
+    </>
+  );
+}
+
+export function ReportTableSkeleton() {
+  return (
+    <div className={`${shimmer} overflow-hidden relative`}>
+      <div>
+        <table className="min-w-full text-gray-900 md:table">
+            <thead className="bg-gray-50 font-normal rounded-t-lg shadow text-left text-sm">
+              <tr>
+                  <th scope="col" className="px-4 pb-2 font-medium sm:pl-6">
+                    <div className="h-[1.25rem] w-16 rounded-md bg-gray-200" />
+                  </th>
+                  <th scope="col" className="px-3 pb-2 font-medium">
+                    <div className="h-[1.25rem] w-32 rounded-md bg-gray-200" />
+                  </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              <ReportTableRowSkeleton />
+              <ReportTableRowSkeleton />
+              <ReportTableRowSkeleton />
+              <ReportTableRowSkeleton />
+              <ReportTableRowSkeleton />
+              <ReportTableRowSkeleton />
+            </tbody>
+        </table>
+      </div> 
+      <div className="bg-white flex mt-1 px-6 py-3 rounded-b-lg text-sm">
+          <div className="h-[1.25rem] w-32 rounded-md bg-gray-200" />
+          <div className="h-[1.25rem] ml-auto w-32 rounded-md bg-gray-200" />
+      </div>
+  </div>
+  );
+}
+
+function ReportTableRowSkeleton() {
+  return (
+    <tr
+      className="w-full border-b py-3 text-sm last-of-type:border-none"
+    >
+        <td className="whitespace-nowrap py-3 pl-6 pr-3">
+          <div className="h-[1.25rem] w-24 rounded bg-gray-200"></div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-3">
+          <div className="h-[1.25rem] w-16 rounded bg-gray-200"></div>
+        </td>
+    </tr>
+  );
+}

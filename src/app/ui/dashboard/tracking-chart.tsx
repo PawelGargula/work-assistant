@@ -3,60 +3,14 @@ import { CalendarIcon } from '@heroicons/react/24/outline';
 import { TimeTrack } from '@prisma/client';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar, Tooltip } from 'recharts';
 import { formatTimeDuration, getTimeDuration } from '@/src/app/lib/utils';
+import { getTimeTracksByDateRange } from '@/src/app/lib/utils';
 
 export default function TrackingChart({
   timeTracks
 } : {
   timeTracks: TimeTrack[]
 }) {
-  const timeTracksByDay = [
-    { 
-      day: new Date(Date.now() - (6 * 24 * 60 * 60 * 1000)).toLocaleDateString(),
-      duration: 0,
-    },
-    { 
-      day: new Date(Date.now() - (5 * 24 * 60 * 60 * 1000)).toLocaleDateString(),
-      duration: 0,
-    },
-    { 
-      day: new Date(Date.now() - (4 * 24 * 60 * 60 * 1000)).toLocaleDateString(),
-      duration: 0,
-    },
-    { 
-      day: new Date(Date.now() - (3 * 24 * 60 * 60 * 1000)).toLocaleDateString(),
-      duration: 0,
-    },
-    { 
-      day: new Date(Date.now() - (2 * 24 * 60 * 60 * 1000)).toLocaleDateString(),
-      duration: 0,
-    },
-    { 
-      day: new Date(Date.now() - (24 * 60 * 60 * 1000)).toLocaleDateString(),
-      duration: 0,
-    },
-    { 
-      day: new Date().toLocaleDateString(),
-      duration: 0,
-    }
-  ];
-
-  timeTracks.forEach(({startTime, endTime}) => {
-    if (startTime.toLocaleDateString() === endTime?.toLocaleDateString() 
-      || (endTime === null && startTime.toLocaleDateString() === new Date().toLocaleDateString())) {
-        const timeTrackByDay = timeTracksByDay.find(timeTrackByDay => timeTrackByDay.day === startTime.toLocaleDateString());
-        timeTrackByDay && (timeTrackByDay!.duration += getTimeDuration(startTime, endTime));    
-    } else {
-      let currentDay = new Date(startTime);
-      !endTime && (endTime = new Date());
-      while(currentDay < endTime) {
-        const nextDayStart = new Date(currentDay).setHours(0,0,0,0) + (24 * 60 * 60 * 1000);
-        const endOfCurrentDay = new Date(Math.min(nextDayStart, Number(new Date(endTime))));
-        const timeTrackByDay = timeTracksByDay.find(timeTrackByDay => timeTrackByDay.day === currentDay.toLocaleDateString());
-        timeTrackByDay && (timeTrackByDay!.duration += getTimeDuration(currentDay, endOfCurrentDay));
-        currentDay = endOfCurrentDay;
-      }
-    }
-  });
+  const timeTracksByDay = getTimeTracksByDateRange(timeTracks, new Date(Date.now() - (6 * 24 * 60 * 60 * 1000)), new Date()); 
 
   const sumOfAllDays = timeTracksByDay.reduce((sum, currentDay) => sum + currentDay.duration, 0);
   const avaragePerDay = sumOfAllDays / timeTracksByDay.length;
