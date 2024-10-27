@@ -10,7 +10,8 @@ export default function TrackingChart({
 } : {
   timeTracks: TimeTrack[]
 }) {
-  const timeTracksByDay = getTimeTracksByDateRange(timeTracks, new Date(Date.now() - (6 * 24 * 60 * 60 * 1000)), new Date()); 
+  const sevenDaysBeforeAtZeroHour = new Date(new Date().setDate(new Date().getDate() - 6)).setHours(0,0,0,0);
+  const timeTracksByDay = getTimeTracksByDateRange(timeTracks, new Date(sevenDaysBeforeAtZeroHour), new Date()); 
 
   const sumOfAllDays = timeTracksByDay.reduce((sum, currentDay) => sum + currentDay.duration, 0);
   const avaragePerDay = sumOfAllDays / timeTracksByDay.length;
