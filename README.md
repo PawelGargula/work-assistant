@@ -2,7 +2,7 @@
 
 Enhance your productivity and enjoy your work more with Work Assistant.
 
-## [Live Demo](https://work-assistant-puce.vercel.app/)
+## [Live](https://work-assistant-puce.vercel.app/)
 
 ## Overview
 
