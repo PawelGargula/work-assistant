@@ -1,4 +1,4 @@
-import { CompleteTask, SetTaskStatusAsNotTracking, StartTrackingTask, UpdateTask } from '@/src/app/ui/tasks/buttons';
+import { CompleteTask, SetTaskStatusAsNotTracking, StartTrackingTask, UpdateTask, DeleteTask } from '@/src/app/ui/tasks/buttons';
 import { fetchFilteredTasks } from '@/src/app/lib/data';
 import clsx from 'clsx';
 import { TaskStatus } from '@prisma/client';
@@ -55,6 +55,7 @@ export default async function TasksTable({
                           {task.status !== TaskStatus.TRACKING && <StartTrackingTask id={task.id} />}
                           {task.status !== TaskStatus.COMPLETED && <CompleteTask id={task.id} />}
                           <UpdateTask id={task.id} />
+                          <DeleteTask task={task} />
                         </div>
                       </td>
                     </tr>

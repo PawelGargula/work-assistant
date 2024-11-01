@@ -158,6 +158,7 @@ export function TaskTableRowSkeleton() {
               <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
               <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
               <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
+              <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
             </div>
         </td>
         </tr>

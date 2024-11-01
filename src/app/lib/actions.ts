@@ -373,6 +373,32 @@ export async function completeTask(id: string) {
   }
 }
 
+export async function deleteTask(id: string) {
+  const session = await auth();
+  const sessionUserId = session?.user?.id;
+  const isLoggedIn = !!sessionUserId;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  try {
+    await prisma.task.delete({
+      where: {
+        id: id,
+        userId: sessionUserId
+      }
+    });
+
+    // Revalidate the cache for the tasks page.
+    revalidatePath('/dashboard/tasks');
+  } catch (error) {
+    return { message: 'Database Error: Failed to delete Task.' };
+  }
+}
+
 // Time tracks
 const TimeTrackFormSchema = z.object({
   id: z.string().cuid(),
