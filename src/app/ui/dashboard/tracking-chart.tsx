@@ -2,7 +2,7 @@
 import { CalendarIcon } from '@heroicons/react/24/outline';
 import { TimeTrack } from '@prisma/client';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar, Tooltip } from 'recharts';
-import { formatTimeDuration, getTimeDuration } from '@/src/app/lib/utils';
+import { formatTimeDuration } from '@/src/app/lib/utils';
 import { getTimeTracksByDateRange } from '@/src/app/lib/utils';
 
 export default function TrackingChart({

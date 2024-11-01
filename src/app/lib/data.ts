@@ -384,7 +384,8 @@ export async function fetchTimeTracksByDateRange(from: string | undefined, to: s
         },
         OR: [
           { startTime: { gte: from, lt: to} }, // StartTime inside range
-          { endTime: { gte: from, lt: to } } // EndTime inside range
+          { endTime: { gte: from, lt: to } }, // EndTime inside range
+          { startTime: { lt: from }, endTime: null }
         ],
       },
       include: {

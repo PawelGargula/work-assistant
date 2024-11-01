@@ -87,7 +87,7 @@ export const getTimeTracksByDateRange = (timeTracks: TimeTrack[], from: Date, to
       let currentDay = new Date(startTime);
       !endTime && (endTime = new Date());
       while(currentDay < endTime) {
-        const nextDayStart = new Date(currentDay).setHours(0,0,0,0) + (24 * 60 * 60 * 1000);
+        const nextDayStart = new Date(new Date(currentDay).setDate(currentDay.getDate() + 1)).setHours(0,0,0,0);
         const endOfCurrentDay = new Date(Math.min(nextDayStart, Number(new Date(endTime))));
         const timeTrackByDay = timeTracksByDay.find(timeTrackByDay => timeTrackByDay.day === currentDay.toLocaleDateString());
         timeTrackByDay && (timeTrackByDay!.duration += getTimeDuration(currentDay, endOfCurrentDay));
