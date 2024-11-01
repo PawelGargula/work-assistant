@@ -27,7 +27,7 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 
 - **Terms of Service and Privacy Policy:** Easily accessible and clear terms and conditions.
 - **Email Authentication:** Secure sign-in using email authentication links.
-- **Task Management:** Create and edit tasks with planned completion times.
+- **Task Management:** Create, edit, delete tasks with planned completion times.
 - **Time Tracking:** Start and stop tracking time for tasks.
 - **Task Completion:** Mark tasks as complete.
 - **Time Tracks Management:** View and edit all your time tracks.
@@ -61,6 +61,7 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 ![Dashboard](screenshots/dashboard.png)
 ![Tasks](screenshots/tasks.png)
 ![Task](screenshots/task.png)
+![Delete Task](screenshots/delete-task.png)
 ![Task Time tracks](screenshots/task-time-tracks.png)
 ![Time tracks](screenshots/time-tracks.png)
 ![Report selection](screenshots/report-select.png)
