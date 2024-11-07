@@ -57,7 +57,6 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 
 ## Screenshots
 
-![Home](screenshots/opengraph-image.png)
 ![Dashboard](screenshots/dashboard.png)
 ![Tasks](screenshots/tasks.png)
 ![Task](screenshots/task.png)
