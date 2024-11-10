@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import prisma from '@/src/app/lib/prisma';
 import { TaskStatus } from '@prisma/client';
-import { fetchTaskById, fetchTimeTrackById } from '@/src/app/lib/data';
+import { fetchGroupById, fetchTaskById, fetchTimeTrackById } from '@/src/app/lib/data';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -89,15 +89,27 @@ export async function createTask(prevState: CreateTaskState, formData: FormData)
   const { title, minutes, hours } = validatedFields.data;
   const plannedCompletionTime = hours * 60 + minutes;
   const description = formData.get('description')?.toString() ?? "";
+  const formDataGroup = formData.get('group');
+  const groupId = formDataGroup ? formDataGroup?.toString() : null;
   const userId = session?.user?.id as string;
 
   // Insert data into the database
   try {
+    if (groupId) {
+      const prevGroup = await fetchGroupById(groupId);
+      if (!prevGroup) {
+        return {
+          message: 'Group not found.',
+        };
+      }
+    }
+
     const task = await prisma.task.create({
       data: {
         title: title,
         description: description,
         plannedCompletionTime: plannedCompletionTime,
+        groupId: groupId,
         userId: userId
       }
     })
@@ -145,6 +157,8 @@ export async function updateTask(id: string, prevState: UpdateTaskState, formDat
   const { title, minutes, hours, status } = validatedFields.data;
   const plannedCompletionTime = hours * 60 + minutes;
   const description = formData.get('description')?.toString().trim();
+  const formDataGroup = formData.get('group');
+  const groupId = formDataGroup ? formDataGroup?.toString() : null;
 
   // Insert data into the database
   try {
@@ -154,6 +168,15 @@ export async function updateTask(id: string, prevState: UpdateTaskState, formDat
       return {
         message: 'Failed to Update Task.',
       };
+    }
+
+    if (groupId) {
+      const prevGroup = await fetchGroupById(groupId);
+      if (!prevGroup) {
+        return {
+          message: 'Group not found.',
+        };
+      }
     }
 
     const isStatusChanged = prevTask?.status !== status;
@@ -208,7 +231,8 @@ export async function updateTask(id: string, prevState: UpdateTaskState, formDat
         title: title,
         description: description,
         plannedCompletionTime: plannedCompletionTime,
-        status: status
+        status: status,
+        groupId: groupId
       }
     })
   } catch (error) {
@@ -522,6 +546,186 @@ export async function updateTimeTrack(id: string, prevState: UpdateTimeTrackStat
   // Revalidate the cache for the tasks page and redirect the tasks.
   revalidatePath('/dashboard/time-tracks');
   redirect('/dashboard/time-tracks');
+}
+
+// Group
+const GroupFormSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, { message: "Name is required" }),
+});
+
+export type GroupFormState = {
+  errors?: {
+    name?: string[];
+  };
+  message?: string | null;
+}
+
+export async function createGroup(prevState: GroupFormState, formData: FormData) {
+  const session = await auth();
+  const isLoggedIn = !!session?.user?.id;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  // Validate form using Zod
+  const validatedFields = GroupFormSchema.safeParse({
+    name: formData.get('group-name'),
+  });
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Group.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { name } = validatedFields.data;
+  const userId = session?.user?.id as string;
+
+  
+  try {
+    const groupNameExists = await prisma.group.findFirst({
+      where: {
+        name: name,
+        userId: userId
+      }
+    });
+
+    if (groupNameExists !== null) {
+      return {
+        errors: {
+          name: ["There is already other group with entered Name"]
+        },
+        message: 'Failed to Create Group.',
+      };
+    }
+
+    // Insert data into the database
+    const group = await prisma.group.create({
+      data: {
+        name: name,
+        userId: userId
+      }
+    });
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+
+    return {
+      message: 'Database Error: Failed to Create Group.',
+    };
+  }
+
+  // Revalidate the cache for the groups page and redirect.
+  revalidatePath('/dashboard/groups');
+  redirect('/dashboard/groups');
+}
+
+export async function updateGroup(id: string, prevState: GroupFormState, formData: FormData) {
+  const session = await auth();
+  const userId = session?.user?.id;
+  const isLoggedIn = !!userId;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  // Validate form using Zod
+  const validatedFields = GroupFormSchema.safeParse({
+    name: formData.get('group-name'),
+  });
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Group.',
+    };
+  }
+
+  // Prepare data for update into the database
+  const { name } = validatedFields.data;
+
+  try {
+    // Additional validation, is the group exist and is assigned to the loggedin User
+    const prevGroup = await fetchGroupById(id);
+    if (!prevGroup) {
+      return {
+        message: 'Failed to Update Group.',
+      };
+    }
+
+    const groupNameExists = await prisma.group.findFirst({
+      where: {
+        id: { not: id },
+        name: name,
+        userId: userId
+      }
+    });
+
+    if (groupNameExists !== null) {
+      return {
+        errors: {
+          name: ["There is already other group with entered Name"]
+        },
+        message: 'Failed to Update Group.',
+      };
+    }
+
+    await prisma.group.update({
+      data: {
+        name: name
+      },
+      where: {
+        id: id
+      }
+    })
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+
+    return {
+      message: 'Database Error: Failed to Update Group.',
+    };
+  }
+
+  // Revalidate the cache for the tasks page and redirect the tasks.
+  revalidatePath('/dashboard/groups');
+  redirect('/dashboard/groups');
+}
+
+export async function deleteGroup(id: string) {
+  const session = await auth();
+  const sessionUserId = session?.user?.id;
+  const isLoggedIn = !!sessionUserId;
+
+  if (!isLoggedIn) {
+    return {
+      message: 'You are not logged in.',
+    };
+  }
+
+  try {
+    await prisma.group.delete({
+      where: {
+        id: id,
+        userId: sessionUserId
+      }
+    });
+
+    // Revalidate the cache for the tasks page.
+    revalidatePath('/dashboard/groups');
+  } catch (error) {
+    return { message: 'Database Error: Failed to delete Group.' };
+  }
 }
 
 // User

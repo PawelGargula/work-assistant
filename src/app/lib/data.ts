@@ -167,6 +167,13 @@ export async function fetchFilteredTasks(
         },
         status: status
       },
+      include: {
+        group: {
+          select: {
+            name: true,
+          }
+        }
+      },
       orderBy: [
         {
           status: 'asc',
@@ -363,8 +370,117 @@ export async function fetchTimeTrackById(id: string) {
   }
 }
 
+// Groups
+export async function fetchFilteredGroups(
+  query: string, 
+  currentPage: number
+) {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  const skip = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const groups = await prisma.group.findMany({
+      where: {
+        userId: userId,
+        name: {
+          contains: query,
+          mode: 'insensitive'
+        }
+      },
+      orderBy: [
+        {
+          updatedAt: 'desc',
+        },
+        {
+          createdAt: 'desc'
+        }
+      ],
+      skip: skip,
+      take: ITEMS_PER_PAGE
+    });
+
+    return groups;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch Groups table.');
+  }
+}
+
+export async function fetchGroupsPages(query: string) {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  try {
+    const count = await prisma.group.count({
+      where: {
+        userId: userId,
+        name: {
+          contains: query,
+          mode: 'insensitive'
+        }
+      }
+    });
+
+    const totalPages = Math.ceil(Number(count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of groups.');
+  }
+}
+
+export async function fetchGroupById(id: string) {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  try {
+    const group = await prisma.group.findUnique({
+      where: {
+        id: id,
+        userId: userId,
+      }
+    });
+
+    return group;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch Group.');
+  }
+}
+
+export async function fetchAllGroups() {
+  noStore();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  try {
+    const groups = await prisma.group.findMany({
+      where: {
+        userId: userId,
+      },
+      orderBy: {
+        name: 'asc'
+      }
+    });
+
+    return groups;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all Groups.');
+  }
+}
+
 // Reports
-export async function fetchTimeTracksByDateRange(from: string | undefined, to: string | undefined) {
+export async function fetchTimeTracksByDateRangeAndGroup(from: string | undefined, to: string | undefined, group: string | undefined) {
   noStore();
 
   const session = await auth();
@@ -381,6 +497,7 @@ export async function fetchTimeTracksByDateRange(from: string | undefined, to: s
       where: {
         task: {
           userId: userId,
+          groupId: group
         },
         OR: [
           { startTime: { gte: from, lt: to} }, // StartTime inside range
@@ -400,6 +517,6 @@ export async function fetchTimeTracksByDateRange(from: string | undefined, to: s
     return timeTracks;
   } catch (err) {
     console.error('Database Error:', err);
-    throw new Error('Failed to fetch Time tracks by date range.');
+    throw new Error('Failed to fetch Time tracks by date range and group.');
   }
 }

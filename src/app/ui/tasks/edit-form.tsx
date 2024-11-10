@@ -5,19 +5,22 @@ import { Button } from '@/src/app/ui/button';
 import { updateTask } from '@/src/app/lib/actions';
 import { useFormState } from 'react-dom';
 import Description from '@/src/app/ui/tasks/rich-text/description';
-import { Task, TimeTrack } from '@prisma/client';
+import { Group, Task, TimeTrack } from '@prisma/client';
 import { PauseCircleIcon, PlayCircleIcon, StopCircleIcon, PlayPauseIcon } from '@heroicons/react/24/outline';
 import { TaskStatus } from '@prisma/client';
 import TimeTracks from '@/src/app/ui/tasks/time-tracks';
 import {Tabs, Tab} from "@nextui-org/react";
 import { useState } from 'react';
+import SelectGroup from './select-group';
 
 export default function EditTaskForm({
   task,
-  taskTimeTracks
+  taskTimeTracks,
+  groups
 }: {
   task: Task,
-  taskTimeTracks: TimeTrack[]
+  taskTimeTracks: TimeTrack[],
+  groups: Group[]
 }) {
   const initialState = { message: "", errors: {} };
   const updateTaskWithId = updateTask.bind(null, task.id);
@@ -151,6 +154,9 @@ export default function EditTaskForm({
               </div>
             </div>
             
+            {/* Assign to Group */}
+            <SelectGroup defaultValue={task.groupId ?? ""} groups={groups} />
+
             {/* Error summary */}
             <div id="create-error" aria-live="polite" aria-atomic="true">
                 {state.message && 

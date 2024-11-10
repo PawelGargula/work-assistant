@@ -54,7 +54,7 @@ export default function DeleteAccout({ email } : { email: string | null | undefi
                                 <h3 className="font-medium">Warning</h3>
                                 <ExclamationTriangleIcon className="w-5"/>
                             </div>
-                            <p className="text-balance text-sm">This will permanently <strong>delete {email} account</strong>, your <strong>tasks</strong> and <strong>time tracks</strong>. After deletion You will be redirect to Sign in page.</p>
+                            <p className="text-balance text-sm">This will permanently <strong>delete {email} account</strong>, your <strong>tasks</strong>, <strong>time tracks</strong> and <strong>groups</strong>. After deletion You will be redirect to Sign in page.</p>
                         </div>
                     </div>
                 </form>

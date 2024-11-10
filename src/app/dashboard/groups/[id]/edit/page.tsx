@@ -1,13 +1,13 @@
-import Form from '@/src/app/ui/tasks/edit-form';
+import Form from '@/src/app/ui/groups/edit-form';
 import Breadcrumbs from '@/src/app/ui/breadcrumbs';
-import { fetchAllGroups, fetchTaskById, fetchTimeTracksByTaskId } from '@/src/app/lib/data';
+import { fetchGroupById } from '@/src/app/lib/data';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'Edit Task',
+  title: 'Edit Group',
 } 
 
 export default async function Page({ params }: {params: { id: string }}) {
@@ -16,11 +16,9 @@ export default async function Page({ params }: {params: { id: string }}) {
   !isLoggedIn && redirect("/");
 
   const id = params.id;  
-  const task = await fetchTaskById(id);
-  const taskTimeTracks = await fetchTimeTracksByTaskId(id);
-  const groups = await fetchAllGroups();
+  const group = await fetchGroupById(id);
 
-  if (!task) {
+  if (!group) {
     notFound();
   }
   
@@ -28,15 +26,15 @@ export default async function Page({ params }: {params: { id: string }}) {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Tasks', href: '/dashboard/tasks' },
+          { label: 'Group', href: '/dashboard/groups' },
           {
-            label: 'Edit Task',
-            href: `/dashboard/tasks/${id}/edit`,
+            label: 'Edit Group',
+            href: `/dashboard/groups/${id}/edit`,
             active: true,
           },
         ]}
       />
-      <Form task={task} taskTimeTracks={taskTimeTracks} groups={groups} />
+      <Form group={group} />
     </main>
   );
 }

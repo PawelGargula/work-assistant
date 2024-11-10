@@ -6,8 +6,10 @@ import { createTask } from '@/src/app/lib/actions';
 import { useFormState } from 'react-dom';
 import Description from '@/src/app/ui/tasks/rich-text/description';
 import { useState } from 'react';
+import { Group } from '@prisma/client/index-browser';
+import SelectGroup from '@/src/app/ui/tasks/select-group';
 
-export default function Form() {
+export default function Form({ groups }: { groups: Group[] }) {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(createTask, initialState);
 
@@ -16,7 +18,7 @@ export default function Form() {
   return (
     <form action={dispatch} aria-describedby='create-error'>
       <div className="bg-gray-50 md:p-6 p-4 rounded-md">
-        {/* Name */}
+        {/* Title */}
         <div className="mb-4">
           <label htmlFor="title" className="block font-medium mb-2 text-sm">
             Title
@@ -26,7 +28,7 @@ export default function Form() {
             name="title"
             type="text"
             placeholder="Enter Title"
-            className="bg-white block border border-slate-300 focus-visible:outline-violet-500  placeholder-slate-400 px-3 py-2 rounded-md w-full"
+            className="bg-white block border border-slate-300 focus-visible:outline-violet-500 placeholder-slate-400 px-3 py-2 rounded-md w-full"
             aria-describedby='title-error'
           />
           <div id="title-error" aria-live="polite" aria-atomic="true">
@@ -95,6 +97,9 @@ export default function Form() {
           </div>
         </div>
         
+        {/* Assign to Group */}
+        <SelectGroup defaultValue="" groups={groups} />
+
         {/* Error summary */}
         <div id="create-error" aria-live="polite" aria-atomic="true">
             {state.message && 

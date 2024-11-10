@@ -44,6 +44,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     tasks         Task[]
+    groups        Group[]
 }
 
 model VerificationToken {
@@ -64,10 +65,19 @@ model Task {
     createdAt             DateTime    @default(now())
     updatedAt             DateTime?   @updatedAt
     plannedCompletionTime Int // In minutes
-    parent                Task?       @relation("ParentTask", fields: [parentId], references: [id])
-    parentId              String?
-    children              Task[]      @relation("ParentTask")
     timeTracks            TimeTrack[]
+    group                 Group?      @relation(fields: [groupId], references: [id], onDelete: SetNull)
+    groupId               String?
+}
+
+model Group {
+    id        String   @id @default(cuid())
+    name      String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    tasks     Task[]
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String
 }
 
 enum TaskStatus {

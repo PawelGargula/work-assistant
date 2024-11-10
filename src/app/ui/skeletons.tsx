@@ -231,6 +231,96 @@ export function TimeTrackTableRowSkeleton() {
   );
 }
 
+// Groups
+export function GroupsSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-50 md:mb-8`}
+      />
+      <div className="mt-4 flex items-center justify-between gap-2 mb-4 md:mt-8">
+          <div className={`${shimmer} bg-gray-50 flex-1 flex-shrink-0 h-[40px] overflow-hidden relative rounded-md`}></div>
+          <div className={`${shimmer} bg-gray-50 h-[40px] md:w-[157px] overflow-hidden relative rounded-md w-[52px]`}></div>
+      </div>
+      <GroupsTableSkeleton />
+    </>
+  );
+}
+
+export function GroupsTableSkeleton() {
+  return (
+    <div className="mt-6 flow-root">
+      <div className="inline-block min-w-full align-middle">
+        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+          <table className="min-w-full text-gray-900 md:table">
+            <thead className="rounded-lg text-left text-sm font-normal">
+              <tr>
+                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
+                >
+                  <span className="sr-only">Edit</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              <GroupsTableRowSkeleton />
+              <GroupsTableRowSkeleton />
+              <GroupsTableRowSkeleton />
+              <GroupsTableRowSkeleton />
+              <GroupsTableRowSkeleton />
+              <GroupsTableRowSkeleton />
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function GroupsTableRowSkeleton() {
+  return (
+      <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
+        {/* Name */}
+        <td className="relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3">
+          <div className="h-6 w-32 rounded bg-gray-100"></div>
+        </td>
+        {/* Edit */}
+        <td className="whitespace-nowrap py-3 pl-6 pr-3">
+            <div className="flex justify-end gap-3">
+              <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
+              <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
+            </div>
+        </td>
+      </tr>
+  );
+}
+
+export function GroupSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-72 overflow-hidden rounded-md bg-gray-50 md:mb-8`}
+      />
+
+      <div className={`${shimmer} relative overflow-hidden bg-gray-50 md:p-6 p-4 rounded-md`}>
+        <div className="mb-4">
+          <div className="bg-gray-200 h-[20px] mb-2 ml-2 w-16 rounded-md" />
+          <div className="bg-gray-200 h-[42px] ml-2 rounded-md w-full"></div>
+        </div>
+      </div>
+      
+      <div className={`${shimmer} relative overflow-hidden mt-6 flex justify-end gap-4`}>
+        <div className="bg-gray-50 h-10 w-[78px] rounded-md"></div>
+        <div className="bg-gray-50 h-10 w-[121px] rounded-md"></div>
+      </div>
+    </>
+  );
+}
+
 // Reports
 export function ReportsSkeleton() {
   return (
@@ -244,6 +334,9 @@ export function ReportsSkeleton() {
         </div>
         <div className={`${shimmer} bg-gray-100 flex items-center h-[39px] overflow-hidden relative w-[255px] rounded`}>
           <div className="bg-white h-[14px] ml-auto mr-3 w-[14px]"></div>
+        </div>
+        <div className={`${shimmer} bg-gray-100 flex items-center h-[39px] overflow-hidden relative w-[157px] rounded`}>
+          <div className="bg-white h-[7px] ml-auto mr-3 w-[14px]"></div>
         </div>
       </div>
       <div className="bg-gray-50 md:p-6 p-4 rounded-md">

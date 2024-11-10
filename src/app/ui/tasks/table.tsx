@@ -28,6 +28,9 @@ export default async function TasksTable({
                     <th scope="col" className="px-3 py-5 font-medium">
                       Status
                     </th>
+                    <th scope="col" className="px-3 py-5 font-medium">
+                      Group
+                    </th>
                     <th scope="col" className="relative py-3 pl-6 pr-3">
                       <span className="sr-only">Edit</span>
                     </th>
@@ -37,8 +40,11 @@ export default async function TasksTable({
                 <tbody className="divide-y divide-gray-200 text-gray-900 bg-white">
                   {tasks.map((task) => (
                     <tr key={task.id} className="group">
-                      <td className="whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
-                        {task.title}
+                      <td className="whitespace-nowrap bg-white flex py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
+                        <span 
+                          className="inline-block max-w-96 text-ellipsis overflow-hidden"
+                          title={task.title}
+                        >{task.title}</span>
                       </td>
                       <td className={clsx("whitespace-nowrap px-4 py-5 text-sm", {
                         'text-slate-600': task.status === TaskStatus.NOTTRACKING,
@@ -48,6 +54,14 @@ export default async function TasksTable({
                         {task.status === TaskStatus.NOTTRACKING ? "Not tracking" 
                         : task.status === TaskStatus.TRACKING ? "Tracking" 
                         : "Completed"}
+                      </td>
+                      <td className="flex whitespace-nowrap px-4 py-5 text-sm">
+                          {task.group?.name ?
+                            <span 
+                              className='bg-gray-600 border border-gray-600 inline-block max-w-48 text-ellipsis overflow-hidden text-white rounded p-1'
+                              title={task.group?.name}
+                            >{task.group?.name}</span>  
+                          : <span className='bg-gray-500 border border-gray-500 text-white rounded p-1'>None</span>}
                       </td>
                       <td className="whitespace-nowrap py-3 pl-6 pr-3">
                         <div className="flex justify-end gap-3">

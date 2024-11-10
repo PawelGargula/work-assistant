@@ -3,7 +3,8 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import SelectReportCategory from '@/src/app/ui/reports/select-report-category';
 import ReportPeriodPicker from '@/src/app/ui/reports/report-period-picker';
-import { fetchTimeTracksByDateRange } from '@/src/app/lib/data';
+import SelectGroup from '@/src/app/ui/reports/select-group';
+import { fetchAllGroups, fetchTimeTracksByDateRangeAndGroup } from '@/src/app/lib/data';
 import { ReportCategory } from '@/src/app/ui/reports/report-category';
 import ReportByDay from '@/src/app/ui/reports/report-by-day';
 import ReportByWeek from '@/src/app/ui/reports/report-by-week';
@@ -23,6 +24,7 @@ export default async function ReportsPage({
       from?: string;
       to?: string;
       category?: string;
+      group?: string;
   }
 }) {
   const session = await auth();
@@ -32,7 +34,9 @@ export default async function ReportsPage({
   const from = searchParams?.from;
   const to = searchParams?.to;
   const category = searchParams?.category;
-  const timeTracks = await fetchTimeTracksByDateRange(from, to);
+  const group = searchParams?.group;
+  const timeTracks = await fetchTimeTracksByDateRangeAndGroup(from, to, group);
+  const groups = await fetchAllGroups();
 
   return (
     <main>
@@ -43,6 +47,7 @@ export default async function ReportsPage({
         <div className='flex gap-3 flex-wrap mb-4 md:mb-6'>
           <SelectReportCategory />
           <ReportPeriodPicker />
+          <SelectGroup groups={groups} />
         </div>
 
         {category && to && from && <div className="bg-gray-50 md:p-6 p-4 rounded-md">
