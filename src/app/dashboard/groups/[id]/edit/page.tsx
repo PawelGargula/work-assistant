@@ -26,7 +26,7 @@ export default async function Page({ params }: {params: { id: string }}) {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Group', href: '/dashboard/groups' },
+          { label: 'Groups', href: '/dashboard/groups' },
           {
             label: 'Edit Group',
             href: `/dashboard/groups/${id}/edit`,

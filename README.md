@@ -31,6 +31,7 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 - **Time Tracking:** Start and stop tracking time for tasks.
 - **Task Completion:** Mark tasks as complete.
 - **Time Tracks Management:** View and edit all your time tracks.
+- **Task Grouping:** Organize tasks into groups for easier management and reporting.
 - **Dashboard Reports:** Get a comprehensive overview of your work with various reports:
   - Number of created tasks.
   - Total tracked hours.
@@ -40,6 +41,7 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 - **Reports Module:** Generate detailed reports based on different categories such as day, week, month, and task. This helps in understanding your productivity trends and making informed decisions.
   - **Report Categories:** Choose from Day, Week, Month, or Task to view specific report.
   - **Date Range Selection:** Use the date range picker to specify the period for your report.
+  - **Group Selection:** Filter reports by the Group assigned to tasks for a more detailed analysis.
   - **Dynamic Report Generation:** Reports are generated dynamically based on selected criteria.
   - **Data Visualization:** View tracked time and averages in a tabular format for easy analysis.
 - **Pomodoro Timer:** A background timer to enhance focus and productivity:
@@ -51,7 +53,6 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 
 ### Planned
 
-- **Hierarchical Tasks:** Organize tasks in a hierarchical structure.
 - **Export Reports:** Export your work status and reports.
 - **AI Assistance:** Get help and insights from AI.
 
@@ -63,11 +64,15 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 ![Delete Task](screenshots/delete-task.png)
 ![Task Time tracks](screenshots/task-time-tracks.png)
 ![Time tracks](screenshots/time-tracks.png)
+![Groups](screenshots/groups.png)
+![Create Group](screenshots/create-group.png)
+![Delete Group](screenshots/delete-group.png)
 ![Report selection](screenshots/report-select.png)
 ![Report per Day](screenshots/report-per-day.png)
 ![Report per Week](screenshots/report-per-week.png)
 ![Report per Month](screenshots/report-per-month.png)
 ![Report per Task](screenshots/report-per-task.png)
+![Report per Task and Group](screenshots/report-per-task-and-group.png)
 ![Account](screenshots/account.png)
 ![Terms of Service and Privacy Policy page](screenshots/terms-of-service-page.png)
 ![Terms of Service and Privacy Policy](screenshots/terms-of-service.png)
