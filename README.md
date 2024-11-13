@@ -58,6 +58,7 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 
 ## Screenshots
 
+![Sign in](screenshots/sign-in.png)
 ![Dashboard](screenshots/dashboard.png)
 ![Tasks](screenshots/tasks.png)
 ![Task](screenshots/task.png)
