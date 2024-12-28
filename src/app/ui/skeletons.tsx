@@ -332,11 +332,11 @@ export function ReportsSkeleton() {
         <div className={`${shimmer} bg-gray-100 flex items-center h-[39px] overflow-hidden relative w-[157px] rounded`}>
           <div className="bg-white h-[7px] ml-auto mr-3 w-[14px]"></div>
         </div>
-        <div className={`${shimmer} bg-gray-100 flex items-center h-[39px] overflow-hidden relative w-[255px] rounded`}>
-          <div className="bg-white h-[14px] ml-auto mr-3 w-[14px]"></div>
-        </div>
         <div className={`${shimmer} bg-gray-100 flex items-center h-[39px] overflow-hidden relative w-[157px] rounded`}>
           <div className="bg-white h-[7px] ml-auto mr-3 w-[14px]"></div>
+        </div>
+        <div className={`${shimmer} bg-gray-100 flex items-center h-[39px] overflow-hidden relative w-[255px] rounded`}>
+          <div className="bg-white h-[14px] ml-auto mr-3 w-[14px]"></div>
         </div>
       </div>
       <div className="bg-gray-50 md:p-6 p-4 rounded-md">

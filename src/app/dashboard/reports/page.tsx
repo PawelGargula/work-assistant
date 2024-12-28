@@ -46,8 +46,8 @@ export default async function ReportsPage({
 
         <div className='flex gap-3 flex-wrap mb-4 md:mb-6'>
           <SelectReportCategory />
-          <ReportPeriodPicker />
           <SelectGroup groups={groups} />
+          <ReportPeriodPicker />
         </div>
 
         {category && to && from && <div className="bg-gray-50 md:p-6 p-4 rounded-md">
