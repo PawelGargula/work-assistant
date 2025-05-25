@@ -11,8 +11,8 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { completeTask, setTaskStatusAsNotTracking, startTrackingTask, deleteTask } from '@/src/app/lib/actions';
-import { useFormStatus, useFormState } from 'react-dom';
-import { useRef, useState } from "react";
+import { useFormStatus } from 'react-dom';
+import { useRef, useState, useActionState } from "react";
 import { Task } from '@prisma/client';
 
 const initialState = {
@@ -126,7 +126,7 @@ export function DeleteTask({ task } : { task: Task; }) {
 
   const initialState = { message: "", errors: {} };
   const deleteTaskWithId = deleteTask.bind(null, task.id);
-  const [state, dispatch] = useFormState(deleteTaskWithId, initialState);
+  const [state, dispatch] = useActionState(deleteTaskWithId, initialState);
 
   const label = "Delete Task";
 

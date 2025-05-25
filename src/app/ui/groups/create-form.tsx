@@ -1,13 +1,13 @@
 "use client";
 
+import { useActionState } from "react";
 import Link from 'next/link';
 import { Button } from '@/src/app/ui/button';
 import { createGroup } from '@/src/app/lib/actions';
-import { useFormState } from 'react-dom';
 
 export default function Form() {
   const initialState = { message: "", errors: {} };
-  const [state, dispatch] = useFormState(createGroup, initialState);
+  const [state, dispatch] = useActionState(createGroup, initialState);
 
   return (
     <form action={dispatch} aria-describedby='create-error'>

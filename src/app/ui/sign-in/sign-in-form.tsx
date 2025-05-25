@@ -1,12 +1,11 @@
 'use client'
-import { useFormState } from 'react-dom';
 import { authenticate } from '@/src/app/lib/actions';
 import SignInButton from '@/src/app/ui/sign-in/sign-in-button';
 import TermsOfService from '@/src/app/ui/sign-in/terms-of-service';
-import { useState } from 'react';
- 
+import { useState, useActionState } from 'react';
+
 export default function SignInForm() {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  const [errorMessage, dispatch] = useActionState(authenticate, undefined);
   const [isTermsOfServiceAccepted, setIsTermsOfServiceAccepted] = useState(false);
 
   return (

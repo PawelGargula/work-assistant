@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef, useState } from "react";
+import { useRef, useState, useActionState } from "react";
 import { XMarkIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { deleteUser } from "@/src/app/lib/actions";
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 
 export default function DeleteAccout({ email } : { email: string | null | undefined; }) {
     const expectedConfirmationValue = "delete my account";
@@ -11,7 +11,7 @@ export default function DeleteAccout({ email } : { email: string | null | undefi
     const [confirmationValue, setConfirmationValue] = useState("");
 
     const initialState = { message: "", errors: {} };
-    const [state, dispatch] = useFormState(deleteUser, initialState);
+    const [state, dispatch] = useActionState(deleteUser, initialState);
 
     const DeleteAccountButton = () => {
         const { pending } = useFormStatus(); 

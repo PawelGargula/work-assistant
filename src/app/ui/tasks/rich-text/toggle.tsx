@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 export default function Toggle({ 
     label, pressed, onPressedChanged, children 
 }: {
-    label: string, pressed: boolean, onPressedChanged: () => void, children: ReactElement
+    label: string, pressed: boolean, onPressedChanged: () => void, children: ReactElement<any>
 }) {
     return (
         <button 

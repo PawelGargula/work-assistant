@@ -3,9 +3,8 @@
 import Link from 'next/link';
 import { Button } from '@/src/app/ui/button';
 import { updateTimeTrack } from '@/src/app/lib/actions';
-import { useFormState } from 'react-dom';
 import { formatDateForDateTimeLocalInput, formatDateToLocal } from '@/src/app/lib/utils';
-import { useState } from 'react';
+import { useState, useActionState } from 'react';
 
 type TimeTrackWithTaskTitle = {
     id: string,
@@ -23,7 +22,7 @@ export default function EditTimeTrackForm({
 }) {
     const initialState = { message: "", errors: {}, timeTrackOccupied: {} };
     const updateTimeTrackWithId = updateTimeTrack.bind(null, timeTrack.id);
-    const [state, dispatch] = useFormState(updateTimeTrackWithId, initialState);
+    const [state, dispatch] = useActionState(updateTimeTrackWithId, initialState);
     const [startTime, setStartTime] = useState(timeTrack.startTime);
     const [endTime, setEndTime] = useState(timeTrack.endTime);
 

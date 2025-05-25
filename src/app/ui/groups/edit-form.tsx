@@ -1,9 +1,9 @@
 "use client";
 
+import { useActionState } from "react";
 import Link from 'next/link';
 import { Button } from '@/src/app/ui/button';
 import { updateGroup } from '@/src/app/lib/actions';
-import { useFormState } from 'react-dom';
 import { Group } from '@prisma/client';
 
 export default function EditGroupForm({
@@ -13,7 +13,7 @@ export default function EditGroupForm({
 }) {
     const initialState = { message: "", errors: {} };
     const updateGroupWithId = updateGroup.bind(null, group.id);
-    const [state, dispatch] = useFormState(updateGroupWithId, initialState);
+    const [state, dispatch] = useActionState(updateGroupWithId, initialState);
 
     return (
         <form action={dispatch} aria-describedby='create-error'>

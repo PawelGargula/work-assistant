@@ -254,9 +254,7 @@ export async function startTrackingTask(id: string) {
   const isLoggedIn = !!sessionUserId;
 
   if (!isLoggedIn) {
-    return {
-      message: 'You are not logged in.',
-    };
+    throw new Error('You are not logged in.');
   }
 
   try {
@@ -307,7 +305,7 @@ export async function startTrackingTask(id: string) {
     // Revalidate the cache for the tasks page.
     revalidatePath('/dashboard/tasks');
   } catch (error) {
-    return { message: 'Database Error: Failed to start tracking Task.' };
+    throw new Error('Database Error: Failed to start tracking Task.');
   }
 }
 
@@ -317,9 +315,7 @@ export async function setTaskStatusAsNotTracking(id: string) {
   const isLoggedIn = !!sessionUserId;
 
   if (!isLoggedIn) {
-    return {
-      message: 'You are not logged in.',
-    };
+    throw new Error('You are not logged in.');
   }
 
   try {
@@ -350,7 +346,7 @@ export async function setTaskStatusAsNotTracking(id: string) {
     // Revalidate the cache for the tasks page.
     revalidatePath('/dashboard/tasks');
   } catch (error) {
-    return { message: 'Database Error: Failed to set Task status to Not tracking.' };
+    throw new Error('Database Error: Failed to set Task status to Not tracking.');
   }
 }
 
@@ -360,9 +356,7 @@ export async function completeTask(id: string) {
   const isLoggedIn = !!sessionUserId;
 
   if (!isLoggedIn) {
-    return {
-      message: 'You are not logged in.',
-    };
+    throw new Error('You are not logged in.');
   }
 
   try {
@@ -393,7 +387,7 @@ export async function completeTask(id: string) {
     // Revalidate the cache for the tasks page.
     revalidatePath('/dashboard/tasks');
   } catch (error) {
-    return { message: 'Database Error: Failed to complete Task.' };
+    throw new Error('Database Error: Failed to complete Task.');
   }
 }
 

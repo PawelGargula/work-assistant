@@ -10,12 +10,13 @@ export const metadata: Metadata = {
   title: 'Edit Task',
 } 
 
-export default async function Page({ params }: {params: { id: string }}) {
+export default async function Page(props: {params: Promise<{ id: string }>}) {
+  const params = await props.params;
   const session = await auth();
   const isLoggedIn = !!session?.user;
   !isLoggedIn && redirect("/");
 
-  const id = params.id;  
+  const id = params.id;
   const task = await fetchTaskById(id);
   const taskTimeTracks = await fetchTimeTracksByTaskId(id);
   const groups = await fetchAllGroups();
@@ -23,7 +24,7 @@ export default async function Page({ params }: {params: { id: string }}) {
   if (!task) {
     notFound();
   }
-  
+
   return (
     <main>
       <Breadcrumbs

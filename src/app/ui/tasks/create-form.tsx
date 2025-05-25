@@ -3,15 +3,14 @@
 import Link from 'next/link';
 import { Button } from '@/src/app/ui/button';
 import { createTask } from '@/src/app/lib/actions';
-import { useFormState } from 'react-dom';
 import Description from '@/src/app/ui/tasks/rich-text/description';
-import { useState } from 'react';
+import { useState, useActionState } from 'react';
 import { Group } from '@prisma/client/index-browser';
 import SelectGroup from '@/src/app/ui/tasks/select-group';
 
 export default function Form({ groups }: { groups: Group[] }) {
   const initialState = { message: "", errors: {} };
-  const [state, dispatch] = useFormState(createTask, initialState);
+  const [state, dispatch] = useActionState(createTask, initialState);
 
   const [description, setDescription] = useState("");
 

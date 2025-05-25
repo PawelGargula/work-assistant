@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --experimental-https",
+    "dev": "next dev --turbopack --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,24 +12,25 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.2",
     "@heroicons/react": "^2.1.1",
-    "@nextui-org/react": "^2.2.10",
+    "@heroui/react": "^2.7.8",
     "@prisma/client": "^5.22.0",
     "@tiptap/pm": "^2.2.6",
     "@tiptap/react": "^2.2.6",
     "@tiptap/starter-kit": "^2.2.6",
     "@vercel/postgres": "^0.7.2",
+    "caniuse-lite": "^1.0.30001718",
     "clsx": "^2.1.0",
-    "eslint-config-next": "^14.2.5",
-    "framer-motion": "^11.0.28",
+    "eslint-config-next": "15.3.2",
+    "framer-motion": "^12.12.2",
     "immutable": "^4.3.5",
     "lucide-react": "^0.365.0",
-    "next": "^14.2.21",
+    "next": "15.3.2",
     "next-auth": "^5.0.0-beta.25",
     "nodemailer": "^6.9.13",
-    "react": "^18.3.1",
+    "react": "19.1.0",
     "react-device-detect": "^2.2.3",
-    "react-dom": "^18.3.1",
-    "recharts": "^2.12.6",
+    "react-dom": "19.1.0",
+    "recharts": "^2.15.3",
     "rsuite": "^5.71.0",
     "stream": "^0.0.2",
     "use-debounce": "^10.0.0",
@@ -38,8 +39,8 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.1.5",
+    "@types/react-dom": "19.1.5",
     "@types/react-draft-wysiwyg": "^1.13.8",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
@@ -47,5 +48,10 @@
     "prisma": "^5.22.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.1.5",
+    "@types/react-dom": "19.1.5",
+    "react-is": "19.1.0"
   }
 }

@@ -7,10 +7,10 @@ import {
   TrashIcon
 } from '@heroicons/react/24/outline';
 import { Group } from '@prisma/client';
-import { useRef } from 'react';
+import { useRef, useActionState } from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { deleteGroup } from '../../lib/actions';
 
 export function CreateGroup() {
@@ -46,7 +46,7 @@ export function DeleteGroup({ group } : { group: Group; }) {
 
   const initialState = { message: "", errors: {} };
   const deleteGroupWithId = deleteGroup.bind(null, group.id);
-  const [state, dispatch] = useFormState(deleteGroupWithId, initialState);
+  const [state, dispatch] = useActionState(deleteGroupWithId, initialState);
 
   const label = "Delete Group";
 

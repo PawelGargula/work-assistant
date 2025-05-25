@@ -3,14 +3,13 @@
 import Link from 'next/link';
 import { Button } from '@/src/app/ui/button';
 import { updateTask } from '@/src/app/lib/actions';
-import { useFormState } from 'react-dom';
 import Description from '@/src/app/ui/tasks/rich-text/description';
 import { Group, Task, TimeTrack } from '@prisma/client';
 import { PauseCircleIcon, PlayCircleIcon, StopCircleIcon, PlayPauseIcon } from '@heroicons/react/24/outline';
 import { TaskStatus } from '@prisma/client';
 import TimeTracks from '@/src/app/ui/tasks/time-tracks';
-import {Tabs, Tab} from "@nextui-org/react";
-import { useState } from 'react';
+import {Tabs, Tab} from "@heroui/react";
+import { useState, useActionState } from 'react';
 import SelectGroup from './select-group';
 
 export default function EditTaskForm({
@@ -24,7 +23,7 @@ export default function EditTaskForm({
 }) {
   const initialState = { message: "", errors: {} };
   const updateTaskWithId = updateTask.bind(null, task.id);
-  const [state, dispatch] = useFormState(updateTaskWithId, initialState);
+  const [state, dispatch] = useActionState(updateTaskWithId, initialState);
 
   const defaultHours = Math.floor(task.plannedCompletionTime / 60);
   const defaultMinutes = task.plannedCompletionTime % 60;
@@ -55,19 +54,19 @@ export default function EditTaskForm({
               <label className='cursor-pointer flex gap-2 items-center ring-slate-300 has-[:checked]:ring-slate-600 has-[:checked]:text-slate-600 rounded-lg p-2 ring-1 ring-transparent hover:text-slate-600' htmlFor="not-tracking">
                 <PauseCircleIcon className="w-5"/>
                 Not tracking
-                <input className='appearance-none' type="radio" name="status" id="not-tracking" value={TaskStatus.NOTTRACKING} checked={status === TaskStatus.NOTTRACKING} onClick={(e => setStatus(TaskStatus.NOTTRACKING))}/>
+                <input className='appearance-none' type="radio" name="status" id="not-tracking" value={TaskStatus.NOTTRACKING} checked={status === TaskStatus.NOTTRACKING} onChange={(e) => setStatus(TaskStatus.NOTTRACKING)}/>
               </label>
 
               <label className='cursor-pointer flex gap-2 ring-slate-300 has-[:checked]:ring-green-600 has-[:checked]:text-green-600 rounded-lg p-2 ring-1 ring-transparent hover:text-green-600' htmlFor="tracking">
                 <PlayCircleIcon className="w-5"/>
                 Tracking
-                <input className='appearance-none' type="radio" name="status" id="tracking" value={TaskStatus.TRACKING} checked={status === TaskStatus.TRACKING} onClick={(e => setStatus(TaskStatus.TRACKING))} />
+                <input className='appearance-none' type="radio" name="status" id="tracking" value={TaskStatus.TRACKING} checked={status === TaskStatus.TRACKING} onChange={(e) => setStatus(TaskStatus.TRACKING)} />
               </label>
 
               <label className='cursor-pointer flex gap-2 ring-slate-300 has-[:checked]:ring-violet-700 has-[:checked]:text-violet-700 rounded-lg p-2 ring-1 ring-transparent hover:text-violet-700' htmlFor="completed">
                 <StopCircleIcon className="w-5"/>
                 Completed
-                <input className='appearance-none' type="radio" name="status" id="completed" value={TaskStatus.COMPLETED} checked={status === TaskStatus.COMPLETED} onClick={(e => setStatus(TaskStatus.COMPLETED))} />
+                <input className='appearance-none' type="radio" name="status" id="completed" value={TaskStatus.COMPLETED} checked={status === TaskStatus.COMPLETED} onChange={(e) => setStatus(TaskStatus.COMPLETED)} />
               </label>
             </div>
 

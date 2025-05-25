@@ -37,7 +37,7 @@ export default function TrackingChart({
               name="Tracked"
             />
           </BarChart>
-        </ ResponsiveContainer>
+        </ResponsiveContainer>
         <div className="bg-white flex mt-1 px-8 py-3 rounded-b-xl text-sm">
             <span className="font-medium">Avarage:</span><span className='ml-1'>{formatTimeDuration(avaragePerDay)}</span>
             <span className="font-medium ml-auto">Total:</span><span className='ml-1'>{formatTimeDuration(sumOfAllDays)}</span>

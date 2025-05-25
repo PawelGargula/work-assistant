@@ -17,16 +17,17 @@ export const metadata: Metadata = {
   title: 'Reports',
 }
 
-export default async function ReportsPage({
-  searchParams,
-}: {
-  searchParams?: {
-      from?: string;
-      to?: string;
-      category?: string;
-      group?: string;
+export default async function ReportsPage(
+  props: {
+    searchParams?: Promise<{
+        from?: string;
+        to?: string;
+        category?: string;
+        group?: string;
+    }>
   }
-}) {
+) {
+  const searchParams = await props.searchParams;
   const session = await auth();
   const isLoggedIn = !!session?.user;
   !isLoggedIn && redirect("/");

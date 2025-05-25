@@ -10,18 +10,19 @@ export const metadata: Metadata = {
   title: 'Edit Time track',
 } 
 
-export default async function Page({ params }: {params: { id: string }}) {
+export default async function Page(props: {params: Promise<{ id: string }>}) {
+  const params = await props.params;
   const session = await auth();
   const isLoggedIn = !!session?.user;
   !isLoggedIn && redirect("/");
 
-  const id = params.id;  
+  const id = params.id;
   const timeTrack = await fetchTimeTrackById(id);
 
   if (!timeTrack || timeTrack.endTime === null) {
     notFound();
   }
-  
+
   return (
     <main>
       <Breadcrumbs
