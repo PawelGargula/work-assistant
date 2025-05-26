@@ -5,6 +5,7 @@ import { Button } from '@/src/app/ui/button';
 import { updateTimeTrack } from '@/src/app/lib/actions';
 import { formatDateForDateTimeLocalInput, formatDateToLocal } from '@/src/app/lib/utils';
 import { useState, useActionState } from 'react';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 type TimeTrackWithTaskTitle = {
     id: string,
@@ -110,9 +111,10 @@ export default function EditTimeTrackForm({
             <div className="mt-6 flex justify-end gap-4">
             <Link
                 href="/dashboard/time-tracks"
-                className="bg-gray-100 flex font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 items-center px-4 rounded-lg text-sm text-gray-600 transition-colors"
+                className="bg-gray-100 flex gap-2 items-center font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 px-4 rounded-lg text-sm text-gray-600 transition-colors"
             >
-                Cancel
+                <span>Cancel</span>
+                <LinkLoadingIndicator />
             </Link>
             <Button type="submit">Edit Time track</Button>
             </div>

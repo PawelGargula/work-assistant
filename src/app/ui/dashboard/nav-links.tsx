@@ -11,6 +11,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
@@ -68,6 +69,7 @@ export default function NavLinks() {
         >
           <LinkIcon className="w-6" />
           <p className="hidden md:block">{link.name}</p>
+          <LinkLoadingIndicator />
         </Link>
         );
       })}

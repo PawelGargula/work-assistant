@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import Link from 'next/link';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 interface Breadcrumb {
   label: string;
@@ -20,10 +21,16 @@ export default function Breadcrumbs({
             key={breadcrumb.href}
             aria-current={breadcrumb.active}
             className={clsx(
+              'flex items-center',
               breadcrumb.active ? 'text-gray-900' : 'text-gray-500',
             )}
           >
-            <Link className='focus-visible:outline-violet-500 hover:text-violet-600 hover:underline' href={breadcrumb.href}>{breadcrumb.label}</Link>
+            {breadcrumb.active ? 
+            <span>{breadcrumb.label}</span> : 
+            <Link className='flex items-center gap-2 focus-visible:outline-violet-500 hover:text-violet-600 hover:underline' href={breadcrumb.href}>
+              <span>{breadcrumb.label}</span>
+              <LinkLoadingIndicator />
+            </Link>}
             {index < breadcrumbs.length - 1 ? (
               <span className="mx-3 inline-block">/</span>
             ) : null}

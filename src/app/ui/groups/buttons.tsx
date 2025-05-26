@@ -12,15 +12,17 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { deleteGroup } from '../../lib/actions';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 export function CreateGroup() {
     return (
       <Link
         href="/dashboard/groups/create"
-        className=" active:bg-violet-700 bg-violet-500 flex focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500 font-medium h-10 items-center px-4 rounded-lg text-sm  text-white hover:bg-violet-600 transition-colors"
+        className="active:bg-violet-700 bg-violet-500 flex gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500 font-medium h-10 items-center px-4 rounded-lg text-sm text-white hover:bg-violet-600 transition-colors"
       >
+        <LinkLoadingIndicator />
         <span className="hidden md:block">Create Group</span>{' '}
-        <PlusIcon className="h-5 md:ml-4" />
+        <PlusIcon className="h-5" />
       </Link>
     );
 }
@@ -34,7 +36,9 @@ export function UpdateGroup({ id }: { id: string }) {
       href={`/dashboard/groups/${id}/edit`}
       title={label}
     >
-      <PencilIcon className="w-5" />
+      <LinkLoadingIndicator>
+        <PencilIcon className="w-5" />
+      </LinkLoadingIndicator>
     </Link>
   );
 } 

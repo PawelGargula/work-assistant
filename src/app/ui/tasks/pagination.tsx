@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { generatePagination } from '@/src/app/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   const pathname = usePathname();
@@ -90,7 +91,9 @@ function PaginationNumber({
     <div className={className}>{page}</div>
   ) : (
     <Link href={href} className={className} aria-label={label} title={label}>
-      {page}
+      <LinkLoadingIndicator>
+        {page}
+      </LinkLoadingIndicator>
     </Link>
   );
 }
@@ -127,7 +130,9 @@ function PaginationArrow({
     <div className={className}>{icon}</div>
   ) : (
     <Link className={className} href={href} aria-label={label} title={label}>
-      {icon}
+      <LinkLoadingIndicator>
+        {icon}
+      </LinkLoadingIndicator>
     </Link>
   );
 }

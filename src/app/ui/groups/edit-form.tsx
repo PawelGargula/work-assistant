@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/src/app/ui/button';
 import { updateGroup } from '@/src/app/lib/actions';
 import { Group } from '@prisma/client';
-
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 export default function EditGroupForm({
     group
 } : {
@@ -54,9 +54,10 @@ export default function EditGroupForm({
           <div className="mt-6 flex justify-end gap-4">
             <Link
               href="/dashboard/groups"
-              className="bg-gray-100 flex font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 items-center px-4 rounded-lg text-sm text-gray-600 transition-colors"
+              className="bg-gray-100 flex gap-2 items-center font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 px-4 rounded-lg text-sm text-gray-600 transition-colors"
             >
-              Cancel
+              <span>Cancel</span>
+              <LinkLoadingIndicator />
             </Link>
             <Button type="submit">Edit Group</Button>
           </div>

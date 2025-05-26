@@ -11,6 +11,7 @@ import TimeTracks from '@/src/app/ui/tasks/time-tracks';
 import {Tabs, Tab} from "@heroui/react";
 import { useState, useActionState } from 'react';
 import SelectGroup from './select-group';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 export default function EditTaskForm({
   task,
@@ -168,9 +169,10 @@ export default function EditTaskForm({
           <div className="mt-6 flex justify-end gap-4">
             <Link
               href="/dashboard/tasks"
-              className="bg-gray-100 flex font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 items-center px-4 rounded-lg text-sm text-gray-600 transition-colors"
+              className="bg-gray-100 flex gap-2 items-center font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 px-4 rounded-lg text-sm text-gray-600 transition-colors"
             >
-              Cancel
+              <span>Cancel</span>
+              <LinkLoadingIndicator />
             </Link>
             <Button type="submit">Edit Task</Button>
           </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FaceFrownIcon } from '@heroicons/react/24/outline';
- 
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
+
 export default function NotFound() {
   return (
     <main className="flex h-full flex-col items-center justify-center gap-2">
@@ -9,9 +10,10 @@ export default function NotFound() {
       <p>Could not find the requested Group.</p>
       <Link
         href="/dashboard/groups"
-        className="mt-4 rounded-md bg-violet-500 px-4 py-2 text-sm text-white transition-colors hover:bg-violet-600"
+        className="flex items-center gap-2 mt-4 rounded-md bg-violet-500 px-4 py-2 text-sm text-white transition-colors hover:bg-violet-600"
       >
-        Go Back
+        <span>Go Back</span>
+        <LinkLoadingIndicator />
       </Link>
     </main>
   );

@@ -7,6 +7,7 @@ import Description from '@/src/app/ui/tasks/rich-text/description';
 import { useState, useActionState } from 'react';
 import { Group } from '@prisma/client/index-browser';
 import SelectGroup from '@/src/app/ui/tasks/select-group';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 export default function Form({ groups }: { groups: Group[] }) {
   const initialState = { message: "", errors: {} };
@@ -111,9 +112,10 @@ export default function Form({ groups }: { groups: Group[] }) {
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/dashboard/tasks"
-          className="bg-gray-100 flex focus-visible:outline-violet-500 font-medium h-10 hover:bg-gray-200 items-center px-4 rounded-lg text-sm text-gray-600 transition-colors"
+          className="bg-gray-100 flex gap-2 items-center font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 px-4 rounded-lg text-sm text-gray-600 transition-colors"
         >
-          Cancel
+          <span>Cancel</span>
+          <LinkLoadingIndicator />
         </Link>
         <Button type="submit">Create Task</Button>
       </div>

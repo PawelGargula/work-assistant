@@ -3,6 +3,7 @@ import {
   PencilIcon, 
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 const initialState = {
   message: '',
@@ -17,7 +18,9 @@ export function UpdateTimeTrack({ id }: { id: string }) {
       href={`/dashboard/time-tracks/${id}/edit`}
       title={label}
     >
-      <PencilIcon className="w-5" />
+      <LinkLoadingIndicator>
+        <PencilIcon className="w-5" />
+      </LinkLoadingIndicator>
     </Link>
   );
 }

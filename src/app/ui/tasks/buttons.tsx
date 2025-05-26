@@ -14,6 +14,8 @@ import { completeTask, setTaskStatusAsNotTracking, startTrackingTask, deleteTask
 import { useFormStatus } from 'react-dom';
 import { useRef, useState, useActionState } from "react";
 import { Task } from '@prisma/client';
+import PendingAnimation from '@/src/app/ui/pending-animation';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 const initialState = {
   message: '',
@@ -23,10 +25,11 @@ export function CreateTask() {
   return (
     <Link
       href="/dashboard/tasks/create"
-      className=" active:bg-violet-700 bg-violet-500 flex focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500 font-medium h-10 items-center px-4 rounded-lg text-sm  text-white hover:bg-violet-600 transition-colors"
+      className=" active:bg-violet-700 bg-violet-500 flex gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500 font-medium h-10 items-center px-4 rounded-lg text-sm  text-white hover:bg-violet-600 transition-colors"
     >
+      <LinkLoadingIndicator />
       <span className="hidden md:block">Create Task</span>{' '}
-      <PlusIcon className="h-5 md:ml-4" />
+      <PlusIcon className="h-5" />
     </Link>
   );
 }
@@ -39,7 +42,9 @@ export function UpdateTask({ id }: { id: string }) {
       aria-label="Update Task"
       title='Update Task'
     >
-      <PencilIcon className="w-5" />
+      <LinkLoadingIndicator>
+        <PencilIcon className="w-5" />
+      </LinkLoadingIndicator>
     </Link>
   );
 }
@@ -107,15 +112,6 @@ function CompleteTaskButton() {
         : <StopCircleIcon className="w-5" />
       }
     </button>
-  )
-}
-
-function PendingAnimation() {
-  return (
-    <svg className="animate-spin h-5 w-5 text-violet-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-    </svg>
   )
 }
 

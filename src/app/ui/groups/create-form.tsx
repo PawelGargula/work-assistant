@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import Link from 'next/link';
 import { Button } from '@/src/app/ui/button';
 import { createGroup } from '@/src/app/lib/actions';
+import LinkLoadingIndicator from '@/src/app/ui/link-loading-indicator';
 
 export default function Form() {
   const initialState = { message: "", errors: {} };
@@ -47,9 +48,10 @@ export default function Form() {
         <div className="mt-6 flex justify-end gap-4">
             <Link
                 href="/dashboard/groups"
-                className="bg-gray-100 flex font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 items-center px-4 rounded-lg text-sm text-gray-600 transition-colors"
+                className="bg-gray-100 flex gap-2 items-center font-medium focus-visible:outline-violet-500 h-10 hover:bg-gray-200 px-4 rounded-lg text-sm text-gray-600 transition-colors"
             >
-                Cancel
+                <span>Cancel</span>
+                <LinkLoadingIndicator />
             </Link>
             <Button type="submit">Create Group</Button>
         </div>
