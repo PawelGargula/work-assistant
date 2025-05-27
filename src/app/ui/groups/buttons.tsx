@@ -20,9 +20,10 @@ export function CreateGroup() {
         href="/dashboard/groups/create"
         className="active:bg-violet-700 bg-violet-500 flex gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500 font-medium h-10 items-center px-4 rounded-lg text-sm text-white hover:bg-violet-600 transition-colors"
       >
-        <LinkLoadingIndicator />
         <span className="hidden md:block">Create Group</span>{' '}
-        <PlusIcon className="h-5" />
+        <LinkLoadingIndicator>
+          <PlusIcon className="h-5" />
+        </LinkLoadingIndicator>
       </Link>
     );
 }

@@ -67,9 +67,12 @@ export default function NavLinks() {
           href={link.href}
           className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium focus-visible:outline-violet-500 hover:text-violet-600 hover:underline md:flex-none md:justify-start md:p-2 md:px-3"
         >
-          <LinkIcon className="w-6" />
+          <div className='flex items-center justify-center w-6'>
+            <LinkLoadingIndicator>
+              <LinkIcon className="w-6" />
+            </LinkLoadingIndicator>
+          </div>
           <p className="hidden md:block">{link.name}</p>
-          <LinkLoadingIndicator />
         </Link>
         );
       })}
