@@ -104,6 +104,27 @@ export function TaskSkeleton() {
 }
 
 // Tasks
+export function TasksSkeleton() {
+  return (
+    <>
+      <div className='flex w-full items-center justify-between'>
+        <div
+          className={`${shimmer} relative h-8 w-36 overflow-hidden rounded-md bg-gray-50`}
+        />
+        <div className='flex gap-2 items-center'>
+            <div className={`${shimmer} bg-gray-50 h-[30px] md:w-[78px] overflow-hidden relative rounded-md`}></div>
+            <div className={`${shimmer} bg-gray-50 h-[30px] md:w-[160px] overflow-hidden relative rounded-md`}></div>
+        </div>
+      </div>
+      <div className="mt-4 flex items-center justify-between gap-2 mb-4 md:mt-8">
+          <div className={`${shimmer} bg-gray-50 flex-1 flex-shrink-0 h-[40px] overflow-hidden relative rounded-md`}></div>
+          <div className={`${shimmer} bg-gray-50 h-[40px] md:w-[157px] overflow-hidden relative rounded-md w-[52px]`}></div>
+      </div>
+      <TasksTableSkeleton />
+    </>
+  );
+}
+
 export function TasksTableSkeleton() {
     return (
       <div className="mt-6 flow-root">
