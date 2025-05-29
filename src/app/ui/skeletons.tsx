@@ -118,6 +118,9 @@ export function TasksTableSkeleton() {
                   <th scope="col" className="px-3 py-5 font-medium">
                     Status
                   </th>
+                  <th scope="col" className="px-3 py-5 font-medium">
+                    Group
+                  </th>
                   <th
                     scope="col"
                     className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
@@ -145,11 +148,15 @@ export function TaskTableRowSkeleton() {
     return (
         <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
         {/* Title */}
-        <td className="relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3">
+        <td className="relative overflow-hidden whitespace-nowrap py-[23px] pl-6 pr-3">
           <div className="h-6 w-32 rounded bg-gray-100"></div>
         </td>
         {/* Status */}
-        <td className="whitespace-nowrap px-3 py-3">
+        <td className="whitespace-nowrap px-3 py-[23px]">
+            <div className="h-6 w-32 rounded bg-gray-100"></div>
+        </td>
+        {/* Group */}
+        <td className="whitespace-nowrap px-3 py-[23px]">
             <div className="h-6 w-32 rounded bg-gray-100"></div>
         </td>
         {/* Actions */}
