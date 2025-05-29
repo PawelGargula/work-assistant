@@ -43,7 +43,7 @@ export default function Form({ groups }: { groups: Group[] }) {
 
         {/* Description */}
         <div className="mb-4">
-              <Description description={description} setDescription={setDescription} />
+          <Description description={description} setDescription={setDescription} />
         </div>
 
         {/* Planned comletion time */}
@@ -103,7 +103,7 @@ export default function Form({ groups }: { groups: Group[] }) {
         {/* Error summary */}
         <div id="create-error" aria-live="polite" aria-atomic="true">
             {state.message && 
-                <p className="mt-2 text-sm text-red-500">
+                <p className="mt-4 text-sm text-red-500">
                   {state.message}
                 </p>
             }

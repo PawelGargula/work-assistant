@@ -2,7 +2,7 @@ import { Group } from '@prisma/client';
 
 export default function SelectGroup({ defaultValue, groups }: { defaultValue: string, groups: Group[] }) {
   return (
-    <div className="mb-4">
+    <div>
       <label htmlFor="group" className="block font-medium mb-2 text-sm">
         Assign to Group
       </label>

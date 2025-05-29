@@ -193,6 +193,112 @@ export function TaskTableRowSkeleton() {
     );
 }
 
+export function CreateTaskSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-72 overflow-hidden rounded-md bg-gray-50 md:mb-8`}
+      />
+
+      <div className={`${shimmer} relative overflow-hidden bg-gray-50 md:p-6 p-4 rounded-md`}>
+        <div className="space-y-4">
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-16 rounded-md" />
+            <div className="bg-gray-200 h-[42px] rounded-md w-full" />
+          </div>
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-20 rounded-md" />
+            <div className="bg-gray-200 h-[42px] mb-2 rounded-t-md w-full" />
+            <div className="bg-gray-200 h-[256px] rounded-b-md w-full" />
+          </div>
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-36 rounded-md" />
+            <div className="flex gap-1">
+              <div>
+                <div className="bg-gray-200 h-[18px] mb-2 w-12 rounded-md" />
+                <div className="bg-gray-200 h-[42px] rounded-md w-20" />
+              </div>
+              <div>
+                <div className="bg-gray-200 h-[18px] mb-2 w-12 rounded-md" />
+                <div className="bg-gray-200 h-[42px] rounded-md w-20" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-16 rounded-md" />
+            <div className="bg-gray-200 h-[42px] rounded-md w-[135px]" />
+          </div>
+        </div>
+      </div>
+
+      <div className={`${shimmer} relative overflow-hidden mt-6 flex justify-end gap-4`}>
+        <div className="bg-gray-50 h-10 w-[78px] rounded-md"></div>
+        <div className="bg-gray-50 h-10 w-[121px] rounded-md"></div>
+      </div>
+
+    </>
+  );
+}
+
+export function EditTaskSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-72 overflow-hidden rounded-md bg-gray-50 md:mb-8`}
+      />
+
+      <div
+        className={`${shimmer} relative mb-3 h-[40px] w-[173px] overflow-hidden rounded-full bg-gray-50`}
+      />
+
+      <div className={`${shimmer} relative overflow-hidden bg-gray-50 md:p-6 p-4 rounded-md`}>
+        <div className="space-y-4">
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-16 rounded-md" />
+            <div className="flex flex-wrap gap-3">
+              <div className="bg-gray-200 h-[40px] w-[145px] rounded-md" />
+              <div className="bg-gray-200 h-[40px] w-[145px] rounded-md" />
+              <div className="bg-gray-200 h-[40px] w-[145px] rounded-md" />
+            </div>
+          </div>
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-16 rounded-md" />
+            <div className="bg-gray-200 h-[42px] rounded-md w-full" />
+          </div>
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-20 rounded-md" />
+            <div className="bg-gray-200 h-[42px] mb-2 rounded-t-md w-full" />
+            <div className="bg-gray-200 h-[256px] rounded-b-md w-full" />
+          </div>
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-36 rounded-md" />
+            <div className="flex gap-1">
+              <div>
+                <div className="bg-gray-200 h-[18px] mb-2 w-12 rounded-md" />
+                <div className="bg-gray-200 h-[42px] rounded-md w-20" />
+              </div>
+              <div>
+                <div className="bg-gray-200 h-[18px] mb-2 w-12 rounded-md" />
+                <div className="bg-gray-200 h-[42px] rounded-md w-20" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-16 rounded-md" />
+            <div className="bg-gray-200 h-[42px] rounded-md w-[135px]" />
+          </div>
+        </div>
+      </div>
+
+      <div className={`${shimmer} relative overflow-hidden mt-6 flex justify-end gap-4`}>
+        <div className="bg-gray-50 h-10 w-[78px] rounded-md"></div>
+        <div className="bg-gray-50 h-10 w-[121px] rounded-md"></div>
+      </div>
+
+    </>
+  );
+}
+
 // Time tracks
 export function TimeTracksTableSkeleton() {
   return (
