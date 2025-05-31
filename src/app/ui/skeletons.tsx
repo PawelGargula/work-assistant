@@ -300,6 +300,22 @@ export function EditTaskSkeleton() {
 }
 
 // Time tracks
+export function TimeTracksSkeleton() {
+  return (
+    <>
+      <div className='flex w-full items-center justify-between'>
+        <div
+          className={`${shimmer} relative h-8 w-36 overflow-hidden rounded-md bg-gray-50`}
+        />
+      </div>
+      <div className="mt-4 flex items-center justify-between gap-2 mb-4 md:mt-8">
+          <div className={`${shimmer} bg-gray-50 flex-1 flex-shrink-0 h-[40px] overflow-hidden relative rounded-md`}></div>
+      </div>
+      <TimeTracksTableSkeleton />
+    </>
+  );
+}
+
 export function TimeTracksTableSkeleton() {
   return (
     <div className="mt-6 flow-root">
@@ -362,6 +378,93 @@ export function TimeTrackTableRowSkeleton() {
           </div>
       </td>
       </tr>
+  );
+}
+
+export function EditTimeTrackSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-72 overflow-hidden rounded-md bg-gray-50 md:mb-8`}
+      />
+
+      <div className={`${shimmer} relative overflow-hidden bg-gray-50 md:p-6 p-4 rounded-md`}>
+        <div className="space-y-4">
+          <div>
+            <div className="bg-gray-200 h-[20px] mb-2 w-48 rounded-md" />
+          </div>
+          <div className="flex gap-4 flex-wrap">
+            <div className="w-full md:w-fit">
+              <div className="bg-gray-200 h-[18px] mb-2 w-12 rounded-md" />
+              <div className="bg-gray-200 h-[42px] rounded-md w-full md:w-[220px]" />
+            </div>
+            <div className="w-full md:w-fit">
+              <div className="bg-gray-200 h-[18px] mb-2 w-8 rounded-md" />
+              <div className="bg-gray-200 h-[42px] rounded-md w-full md:w-[220px]" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={`${shimmer} relative overflow-hidden mt-6 flex justify-end gap-4`}>
+        <div className="bg-gray-50 h-10 w-[78px] rounded-md"></div>
+        <div className="bg-gray-50 h-10 w-[140px] rounded-md"></div>
+      </div>
+    </>
+  );
+}
+
+// Account
+export function AccountSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-24 overflow-hidden rounded-md bg-gray-50 md:mb-8`}
+      />
+      <div className={`${shimmer} relative overflow-hidden bg-gray-50 md:p-6 p-4 rounded-md`}>
+        <div className="space-y-4">
+          {/* Email preview skeleton */}
+          <div className="flex gap-2 items-center">
+            <div className="bg-gray-200 h-[40px] w-[40px] rounded-md" />
+            <div className="bg-gray-200 h-[20px] w-12 rounded-md" />
+            <div className="bg-gray-200 h-[20px] w-48 rounded-md" />
+          </div>
+          {/* Delete account button skeleton */}
+          <div className="mt-4">
+            <div className="bg-gray-200 h-10 w-[140px] rounded-lg" />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// Terms of Service
+export function TermsOfServiceSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-80 overflow-hidden rounded-md bg-gray-50 md:mb-8`}
+      />
+      <div className={`${shimmer} relative overflow-hidden bg-gray-50 divide-y md:px-6 md:py-2 px-4 py-2 rounded-md`}>
+        {/* Section skeletons */}
+        {Array.from({ length: 8 }).map((_, index) => (
+          <div key={index} className="py-2 space-y-2">
+            {/* Section heading */}
+            <div className="bg-gray-200 h-[20px] w-32 rounded-md" />
+            {/* Section content lines */}
+            <div className="bg-gray-200 h-[16px] w-full rounded-md" />
+            <div className="bg-gray-200 h-[16px] w-3/4 rounded-md" />
+            {index % 3 === 0 && (
+              <>
+                <div className="bg-gray-200 h-[16px] w-5/6 rounded-md" />
+                <div className="bg-gray-200 h-[16px] w-2/3 rounded-md" />
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
