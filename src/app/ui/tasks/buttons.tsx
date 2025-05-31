@@ -63,7 +63,7 @@ function StartTrackingTaskButton() {
   const { pending } = useFormStatus(); 
   const label = 'Start tracking Task';
   return (
-    <button aria-label={label} className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-green-600 p-2 rounded-md" disabled={pending} title={label} type='submit'>
+    <button aria-label={label} className="border disabled:cursor-default disabled:opacity-90 focus-visible:outline-violet-500 hover:text-green-600 p-2 rounded-md" disabled={pending} title={label} type='submit'>
       {pending 
         ? <PendingAnimation />
         : <PlayCircleIcon className="w-5" />
@@ -85,7 +85,7 @@ function SetTaskStatusAsNotTrackingButton() {
   const { pending } = useFormStatus(); 
   const label = 'Set Task status as Not tracking';
   return (
-    <button aria-label={label} className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-slate-600 p-2 rounded-md" disabled={pending} title={label} type='submit'>
+    <button aria-label={label} className="border disabled:cursor-default disabled:opacity-90 focus-visible:outline-violet-500 hover:text-slate-600 p-2 rounded-md" disabled={pending} title={label} type='submit'>
       {pending 
         ? <PendingAnimation />
         : <PauseCircleIcon className="w-5" />
@@ -107,7 +107,7 @@ function CompleteTaskButton() {
   const { pending } = useFormStatus(); 
   const label = 'Complete Task';
   return (
-    <button aria-label={label} className="border disabled:cursor-not-allowed disabled:opacity-90 focus-visible:outline-violet-500 hover:text-violet-700 p-2 rounded-md" disabled={pending} title={label} type='submit'>
+    <button aria-label={label} className="border disabled:cursor-default disabled:opacity-90 focus-visible:outline-violet-500 hover:text-violet-700 p-2 rounded-md" disabled={pending} title={label} type='submit'>
       {pending 
         ? <PendingAnimation />
         : <StopCircleIcon className="w-5" />
