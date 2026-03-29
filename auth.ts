@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import NodeMailer from "next-auth/providers/nodemailer"
+import Google from "next-auth/providers/google"
 import prisma from "@/src/app/lib/prisma"
 
 export const {
@@ -21,7 +22,11 @@ export const {
                 },
             },
             from: process.env.EMAIL_FROM,
-        })
+        }),
+        Google({
+            clientId: process.env.AUTH_GOOGLE_CLIENT_ID,
+            clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET,
+        }),
     ],
     secret: process.env.AUTH_SECRET,
 })

@@ -24,6 +24,17 @@ export async function authenticate(
   }
 }
 
+export async function googleAuthenticate() {
+  try {
+    await signIn("google", { redirectTo: "/dashboard" });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      return 'Something went wrong.';
+    }
+    throw error;
+  }
+}
+
 // Tasks
 const CreateTaskFormSchema = z.object({
   id: z.string().cuid(),
