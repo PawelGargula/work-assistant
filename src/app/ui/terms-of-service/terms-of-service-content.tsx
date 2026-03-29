@@ -41,19 +41,25 @@ export default function TermsOfServiceContent() {
                 <p>We take the security of your data seriously and implement appropriate measures to protect it from unauthorized access, alteration, disclosure, or destruction. These measures include</p>
                 <ul className="list-disc pl-6">
                     <li><strong>Every request and attempt to retrieve or modify data is verified on the server side to ensure that the data is assigned to the logged-in user</strong></li>
-                    <li>Using secure servers and encryption technologies</li>
+                    <li>All communication between your browser and our servers is encrypted via HTTPS</li>
+                    <li>Authentication is delegated to Google OAuth, so we never store or handle your password</li>
                     <li>Regularly updating our security practices to align with industry standards</li>
                 </ul>
             </section>
 
             <section className="py-2">
                 <h3 className="font-medium text-base">Data Sharing</h3>
-                <p><strong>We do not share your personal information or task data with third parties</strong>, except as necessary to</p>
+                <p><strong>We do not sell your personal information or task data.</strong> However, we rely on the following third-party service providers to operate the application</p>
+                <ul className="list-disc pl-6">
+                    <li><strong>Google</strong> (authentication) — used solely to verify your identity during sign-in. We do not share your task data or any other application data with Google.</li>
+                    <li><strong>Vercel</strong> (hosting) — the application is hosted on Vercel. Vercel processes incoming requests and may have access to data transmitted during those requests (e.g. IP addresses, request metadata).</li>
+                    <li><strong>Neon / Vercel Postgres</strong> (database) — your account data and task data are stored in a PostgreSQL database managed by Neon through Vercel Postgres.</li>
+                </ul>
+                <p className="mt-1">These providers act as data processors on our behalf and are bound by their own privacy policies and terms of service. Beyond these providers, we do not share your data with third parties except as necessary to</p>
                 <ul className="list-disc pl-6">
                     <li>Comply with legal obligations</li>
                     <li>Protect our rights and safety, or the rights and safety of our users</li>
                 </ul>
-                <p className="mt-1">We use Google as an authentication provider. During sign-in, you interact directly with Google to verify your identity. We do not share your task data or any other application data with Google.</p>
             </section>
 
             <section className="py-2">
