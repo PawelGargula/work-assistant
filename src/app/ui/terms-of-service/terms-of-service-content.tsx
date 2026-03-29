@@ -11,7 +11,7 @@ export default function TermsOfServiceContent() {
                 <h3 className="font-medium text-base">Data Collection</h3>
                 <h4 className="font-medium">Personal Information</h4>
                 <ul className="list-disc pl-6">
-                    <li><strong>Email Address:</strong> This is used to create your account, send activation/sign in links</li>
+                    <li><strong>Email Address and Profile Information:</strong> When you sign in with Google, we receive your email address, name, and profile picture from your Google account. This information is used to create and identify your account.</li>
                 </ul>
                 <h4 className="font-medium">Task Data</h4>
                     <ul className="list-disc pl-6">
@@ -23,11 +23,11 @@ export default function TermsOfServiceContent() {
             <section className="py-2">
                 <h3 className="font-medium text-base">Use of Collected Data</h3>
                 <h4 className="font-medium">Personal Information</h4>
-                <p>Your email address will be used solely for account-related purposes, including</p>
+                <p>Your personal information will be used solely for account-related purposes, including</p>
                 <ul className="list-disc pl-6">
                     <li><strong>Authentication</strong>, making sure the user is who they say they are</li>
                 </ul>
-                <p>On initial sign in, a Verification Token is sent to the email address provided. This token is valid for 24 hours. If the Verification Token is used within that time (i.e. by clicking on the link in the email) your account is created and you are signed in. If you provide the email address of an existing account when signing in, an email is sent and you are signed into the account associated with that email address when you follow the link in the email.</p>
+                <p>Authentication is handled through Google OAuth. When you sign in, you are redirected to Google where you authorize access. We then receive your basic profile information (email address, name, and profile picture) to create or identify your account. We do not have access to your Google password or any other Google data beyond what is listed above.</p>
                 <h4 className="font-medium mt-1">Task Data</h4>
                 <p>Your task data will be used to</p>
                 <ul className="list-disc pl-6">
@@ -53,6 +53,7 @@ export default function TermsOfServiceContent() {
                     <li>Comply with legal obligations</li>
                     <li>Protect our rights and safety, or the rights and safety of our users</li>
                 </ul>
+                <p className="mt-1">We use Google as an authentication provider. During sign-in, you interact directly with Google to verify your identity. We do not share your task data or any other application data with Google.</p>
             </section>
 
             <section className="py-2">

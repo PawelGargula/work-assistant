@@ -1,8 +1,7 @@
 'use client'
-import { authenticate, googleAuthenticate } from '@/src/app/lib/actions';
-import SignInButton from '@/src/app/ui/sign-in/sign-in-button';
+import { googleAuthenticate } from '@/src/app/lib/actions';
 import TermsOfService from '@/src/app/ui/sign-in/terms-of-service';
-import { useState, useActionState } from 'react';
+import { useState } from 'react';
 
 function GoogleIcon({ className }: { className?: string }) {
   return (
@@ -16,7 +15,6 @@ function GoogleIcon({ className }: { className?: string }) {
 }
 
 export default function SignInForm() {
-  const [errorMessage, dispatch] = useActionState(authenticate, undefined);
   const [isTermsOfServiceAccepted, setIsTermsOfServiceAccepted] = useState(false);
 
   return (
@@ -31,23 +29,6 @@ export default function SignInForm() {
             <GoogleIcon className="h-5 w-5" />
             Sign in with Google
           </button>
-        </form>
-        <div className="my-3 flex items-center gap-2">
-          <div className="h-px flex-1 bg-slate-300" />
-          <span className="text-xs text-slate-500">or</span>
-          <div className="h-px flex-1 bg-slate-300" />
-        </div>
-        <form action={dispatch}>
-          <input 
-            aria-label='e-mail'
-            className='block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus-visible:outline-violet-500'
-            id='e-mail' 
-            name='e-mail' 
-            placeholder='jan.kowalski@domain.com' 
-            required 
-            type="email" 
-          />
-          <SignInButton isTermsOfServiceAccepted={isTermsOfServiceAccepted} />
         </form>
         <TermsOfService 
           isTermsOfServiceAccepted={isTermsOfServiceAccepted} 

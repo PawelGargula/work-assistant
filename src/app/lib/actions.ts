@@ -1,28 +1,12 @@
 'use server'
 
 import { auth, signIn, signOut } from '@/auth';
-import { AuthError } from 'next-auth';
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import prisma from '@/src/app/lib/prisma';
 import { TaskStatus } from '@prisma/client';
 import { fetchGroupById, fetchTaskById, fetchTimeTrackById } from '@/src/app/lib/data';
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  try {
-    const email = formData.get("e-mail");
-    await signIn("nodemailer", { email: email, redirectTo: "/dashboard" });
-  } catch (error) {
-    if (error instanceof AuthError) {
-      return 'Something went wrong.';
-    }
-    throw error;
-  }
-}
 
 export async function googleAuthenticate() {
   await signIn("google", { redirectTo: "/dashboard" });

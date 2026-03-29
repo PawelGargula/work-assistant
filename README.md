@@ -26,7 +26,7 @@ This project leverages a modern tech stack to deliver a robust and scalable appl
 ### Completed
 
 - **Terms of Service and Privacy Policy:** Easily accessible and clear terms and conditions.
-- **Email Authentication:** Secure sign-in using email authentication links.
+- **Google Authentication:** Secure sign-in using Google OAuth.
 - **Task Management:** Create, edit, delete tasks with planned completion times.
 - **Time Tracking:** Start and stop tracking time for tasks.
 - **Task Completion:** Mark tasks as complete.
